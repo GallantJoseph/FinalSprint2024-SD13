@@ -108,3 +108,21 @@ footer {
 .monospace {
 	font-family: "Courier New", Courier, monospace;
 }
+
+.rightalign {
+	text-align: right;
+}
+
+.centeralign {
+	text-align: center;
+}
+
+table {
+	margin: auto;
+	border-collapse: collapse;
+}
+
+td,
+th {
+	padding: 0px 15px;
+}

@@ -7,52 +7,109 @@ var $ = function (id) {
 };
 
 // Define format options for printing.
-const cur2Format = new Intl.NumberFormat("en-CA", {
+const currencyFormat = new Intl.NumberFormat("en-CA", {
 	style: "currency",
 	currency: "CAD",
 	minimumFractionDigits: "2",
 	maximumFractionDigits: "2",
 });
 
-const per2Format = new Intl.NumberFormat("en-CA", {
+const percentageFormat = new Intl.NumberFormat("en-CA", {
 	style: "percent",
 	minimumFractionDigits: "2",
 	maximumFractionDigits: "2",
 });
 
-const com2Format = new Intl.NumberFormat("en-CA", {
+const commaFormat = new Intl.NumberFormat("en-CA", {
 	style: "decimal",
 	minimumFractionDigits: "2",
 	maximumFractionDigits: "2",
 });
 
+const dateFormat = new Intl.DateTimeFormat("en-CA", {
+	// Formats a given date to YYYY-MM-DD
+	dateStyle: "short",
+});
+
 // Start function definitions here.
 
+function TitleCase(str) {
+	str = str.toLowerCase().split(" ");
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+	return str.join(" ");
+}
+
 function LoanAnalysis() {
-	// Template
-	document.getElementById("loan").innerHTML = `
-    <p>Loan Analysis Statement</p>
-		<br />
-		<p>10 year options on $#,###.##</p>
-		<p>Reason: Xxxxxxxx Xxxxxxxxx Xxxxxxxxxx</p>
-		<p>Statement date: YYYY-MM-DD</p>
-		<br />
-		<p>Years&nbsp;&nbsp;Interest&nbsp;&nbsp;Total Amt&nbsp;&nbsp;Mon Payment</p>
-		<p>---------------------------------------</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>&nbsp;##&nbsp;&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;$#,###.##&nbsp;&nbsp;&nbsp;$#,###.##</p>
-		<p>---------------------------------------</p>
-		<p>Payback option selected:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;## Years</p>
-    <button onclick="LoanPrep()">Clear</button>
-  `;
+	// Constants
+	const TODAY = new Date();
+	const INTEREST_RATE = 0.053;
+	const LOANSECTION = document.getElementById("loan");
+
+	// User Input
+	let loanAmt = parseFloat(prompt("Enter Loan Amount", "5000"), 10);
+	let loanReason = prompt("Enter Reason For Loan", "Robot Army");
+	let paybackOption = prompt("Enter Length Of Payment", "10");
+
+	// Display Variables
+	let loanAmtDsp = currencyFormat.format(loanAmt);
+	let loanReasonDsp = TitleCase(loanReason);
+	let todayDsp = dateFormat.format(TODAY);
+
+	let loanDisplay = `
+	<p>Loan Analysis Statement</p>
+	<br />
+	<p>10 Year options on ${loanAmtDsp}</p>
+	<p>Reason: ${loanReasonDsp}</p>
+	<p>Statement date: ${todayDsp}</p>
+	<br />
+
+    <table>
+		<tr>
+			<th>Years</th>
+			<th>Interest</th>
+			<th>Total Amt</th>
+			<th>Mon Payment</th>
+		</tr>
+
+		<tr>
+			<td colspan="4">--------------------------------------------</td>
+		</tr>
+	`;
+
+	for (let years = 1; years <= 10; years++) {
+		let interest = loanAmt * INTEREST_RATE * years;
+		let total = loanAmt + interest;
+		let monthly = total / (years * 12);
+
+		interest = currencyFormat.format(interest);
+		total = currencyFormat.format(total);
+		monthly = currencyFormat.format(monthly);
+
+		loanDisplay += `
+		<tr>
+			<td class="centeralign">${years}</td>
+			<td class="rightalign">${interest}</td>
+			<td class="rightalign">${total}</td>
+			<td class="rightalign">${monthly}</td>
+		</tr>
+		`;
+	}
+
+	loanDisplay += `
+		<tr>
+			<td colspan="4">--------------------------------------------</td>
+		</tr>
+		<tr>
+			<td colspan="3">Payback option selected:</td>
+			<td class="rightalign">${paybackOption} Years</td>
+		</tr>
+	</table>
+	<br />
+	<button onclick="LoanPrep()">Clear</button>
+	`;
+	LOANSECTION.innerHTML = loanDisplay;
 	return;
 }
 
