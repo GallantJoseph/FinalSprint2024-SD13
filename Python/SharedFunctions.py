@@ -1,4 +1,5 @@
 import datetime
+from os import system, name
 
 def FormatDollar2(DollarValue: float):
     '''Function will accept a value and format it to $#,###.##'''
@@ -77,3 +78,6 @@ def FormatPhone(phone: str):
     '''Function will accept a value as a 10 digit Phone Number and format it'''
 
     return f"({phone[0:3]}) {phone[3:6]}-{phone[6:10]}"
+
+def clear():
+    system("cls" if name == "nt" else "clear")
