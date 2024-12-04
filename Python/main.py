@@ -3,7 +3,8 @@ Description:
 Authors:
 Dates:
 """
-from SharedFunctions import clear, placeholder
+from SharedFunctions import clear
+from MenuOptions import *
 from time import sleep
 
 while True:
@@ -26,45 +27,45 @@ while True:
             print("Opening...")
             sleep(1.5)
             clear()
-            placeholder()
+            AshFunctions.placeholder()
         case "2":
             clear()
             print("Opening...")
             sleep(1.5)
             clear()
-            placeholder()
+            AshFunctions.placeholder()
         case "3":
             clear()
             print("Opening...")
             sleep(1.5)
             clear()
-            placeholder()
+            AshFunctions.placeholder()
         case "4":
             clear()
             print("Opening...")
             sleep(1.5)
             clear()
-            placeholder()
+            AshFunctions.placeholder()
         case "5":
             clear()
             print("Opening...")
             sleep(1.5)
             clear()
-            placeholder()
+            AshFunctions.placeholder()
         case "6":
             clear()
             print("Opening...")
             sleep(1.5)
             clear()
-            placeholder()
+            AshFunctions.placeholder()
         case "7":
             clear()
             print("Opening...")
             sleep(1.5)
             clear()
-            placeholder()
+            AshFunctions.placeholder()
         case "8":
-            exit(0) #temp until i make something funny
+            AshFunctions.end()
         case _:
             clear()
             print("Invalid Option...")

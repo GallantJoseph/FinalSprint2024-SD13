@@ -89,10 +89,3 @@ def BackToMenu():
     print("Returning to menu...")
     sleep(1)
     return
-
-def placeholder():
-    print("This is a placeholder!")
-    sleep(1)
-    print("It does nothing!")
-    sleep(1)
-    BackToMenu()
