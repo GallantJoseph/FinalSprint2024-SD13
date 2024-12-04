@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>QAP-4 [Name Pending]</title>
-		<link rel="stylesheet" href="styles.css" />
-		<script src="index.js"></script>
-	</head>
-	<body>
-		<div class="mainbox">
-			<header>
-				<div class="tophead"></div>
+  <head>
+    <title>QAP-4 [Name Pending]</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="mainbox">
+      <header>
+        <div class="tophead">
+          <p id="headermessage"></p>
+          <script type="text/javascript">
+            DspHeaderMessage();
+          </script>
+        </div>
 
-				<img src="Images/TeslaBot.jpg" id="imgSlide" width="1000px" height="160px" />
-			</header>
+        <img
+          src="Images/TeslaBot.jpg"
+          id="imgSlide"
+          width="1000px"
+          height="160px"
+        />
+      </header>
 
-			<nav>
-				<div class="navleft"></div>
+      <nav>
+        <div class="navleft"></div>
 
-				<div class="navright"></div>
-			</nav>
+        <div class="navright"></div>
+      </nav>
 
-			<main>
-				<div class="maintopleft"></div>
+      <main>
+        <div class="maintopleft"></div>
 
-				<div class="mainright">
-					<span id="loan" class="monospace">
-						<button onclick="LoanAnalysis()">Loan Analysis</button>
-					</span>
-				</div>
+        <div class="mainright">
+          <span id="loan" class="monospace">
+            <button onclick="LoanAnalysis()">Loan Analysis</button>
+          </span>
+        </div>
 
-				<div class="mainbottomleft"></div>
-			</main>
+        <div class="mainbottomleft"></div>
+      </main>
 
-			<footer></footer>
-		</div>
-	</body>
+      <footer></footer>
+    </div>
+  </body>
 </html>
