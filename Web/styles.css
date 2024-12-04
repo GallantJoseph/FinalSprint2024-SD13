@@ -1,106 +1,128 @@
 * {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
 }
 
 body {
-  background-color: aquamarine;
+	background-color: aquamarine;
 }
 
 .mainbox {
-  width: 1006px;
-  /* height: 600px; will be removed later */
-  background-color: white;
-  border: 3px solid gray;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: left;
+	width: 1006px;
+	/* height: 600px; will be removed later */
+	background-color: white;
+	border: 3px solid gray;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: left;
 }
 
 /* The header section. */
 header {
-  width: 1000px;
-  height: 200px;
-  background-color: lightgreen;
+	width: 1000px;
+	height: 200px;
+	background-color: lightgreen;
 }
 
 /* The header is made up of a message bar and the banner image. */
 .tophead {
-  width: 1000px;
-  height: 40px;
-  background-color: white;
-  border-bottom: 3px solid gray;
+	width: 1000px;
+	height: 40px;
+	background-color: white;
+	border-bottom: 3px solid gray;
 }
 
 /* The navigation section. */
 
 nav {
-  width: 1000px;
-  height: 50px;
-  background-color: white;
-  border-top: 3px solid gray;
-  border-bottom: 3px solid gray;
+	width: 1000px;
+	height: 50px;
+	background-color: white;
+	border-top: 3px solid gray;
+	border-bottom: 3px solid gray;
 }
 
 /* The nav section will contain 2 divs. */
 
 .navleft {
-  width: 493px;
-  height: 45px;
-  background-color: orange;
-  float: left;
+	width: 493px;
+	height: 45px;
+	background-color: orange;
+	float: left;
 }
 
 .navright {
-  width: 495px;
-  height: 45px;
-  background-color: orange;
-  margin-left: 5px;
-  float: right;
+	width: 495px;
+	height: 45px;
+	background-color: orange;
+	margin-left: 5px;
+	float: right;
 }
 
 main {
-  width: 1000px;
-  height: 625px;
-  background-color: lightyellow;
+	width: 1000px;
+	height: 625px;
+	background-color: lightyellow;
 }
 
 /* The main section will contain 3 divs. */
 
 .maintopleft {
-  width: 490px;
-  height: 300px;
-  background-color: cyan;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 5px;
-  float: left;
+	width: 490px;
+	height: 300px;
+	background-color: cyan;
+	border: 1px solid black;
+	padding: 10px;
+	margin: 5px;
+	float: left;
 }
 
 .mainright {
-  width: 490px;
-  height: 610px;
-  background-color: lightgray;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 5px;
-  float: right;
+	width: 490px;
+	height: 610px;
+	background-color: lightgray;
+	border: 1px solid black;
+	padding: 10px;
+	margin: 5px;
+	float: right;
 }
 
 .mainbottomleft {
-  width: 490px;
-  height: 300px;
-  background-color: lightseagreen;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 5px;
-  float: left;
+	width: 490px;
+	height: 300px;
+	background-color: lightseagreen;
+	border: 1px solid black;
+	padding: 10px;
+	margin: 5px;
+	float: left;
 }
 footer {
-  width: 1000px;
-  height: 80px;
-  background-color: black;
-  border-top: 3px solid gray;
+	width: 1000px;
+	height: 80px;
+	background-color: black;
+	border-top: 3px solid gray;
+}
+
+.monospace {
+	font-family: "Courier New", Courier, monospace;
+}
+
+.rightalign {
+	text-align: right;
+}
+
+.centeralign {
+	text-align: center;
+}
+
+table {
+	margin: auto;
+	border-collapse: collapse;
+}
+
+td,
+th {
+	padding: 0px 15px;
 }
