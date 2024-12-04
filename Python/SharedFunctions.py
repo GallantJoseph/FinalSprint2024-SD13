@@ -1,5 +1,6 @@
 import datetime
 from os import system, name
+from time import sleep
 
 class FormatValues:
     def FormatDollar2(DollarValue: float):
@@ -82,3 +83,16 @@ class FormatValues:
 
 def clear():
     system("cls" if name == "nt" else "clear")
+
+def BackToMenu():
+    clear()
+    print("Returning to menu...")
+    sleep(1)
+    return
+
+def placeholder():
+    print("This is a placeholder!")
+    sleep(1)
+    print("It does nothing!")
+    sleep(1)
+    BackToMenu()
