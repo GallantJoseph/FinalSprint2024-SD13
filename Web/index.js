@@ -26,7 +26,7 @@ const com2Format = new Intl.NumberFormat("en-CA", {
   maximumFractionDigits: "2",
 });
 
-function HeaderMessage() {
+function DspHeaderMessage() {
   // Define the lists for days of the week and months.
   let daysOfWeekLst = [
     "Sunday",
@@ -55,9 +55,14 @@ function HeaderMessage() {
 
   // List of quotes
   let quotesLst = [
-    "",
-    "The danger of the past was that men became slaves. The danger of the future is that men may become robots.",
-    "Robots have solved and will continue to solve so many human problems. Except for all the ones that they cause.",
+    "The only time you fail is when you fall down and stay down.",
+    "Keep your face to the sunshine and you cannot see a shadow.",
+    "You're braver than you believe, and stronger than you seem, and smarter than you think.",
+    "Positive anything is better than negative nothing.",
+    "It's not whether you get knocked down, it's whether you get up.",
+    "The struggle you're in today is developing the strength you need tomorrow.",
+    "Happiness is the only thing that multiplies when you share it.",
+    "The happiness of your life depends upon the quality of your thoughts.",
   ];
 
   let currDate = new Date();
@@ -68,25 +73,20 @@ function HeaderMessage() {
   let day = currDate.getDate();
   let hours = currDate.getHours();
 
-  let morning = "Morning";
-  let afterNoon = "Afternoon";
-  let evening = "Evening";
-  let night = "Night";
-
   // Greeting for time of day.
 
   let timeDayMsg = "Good ";
   if (hours >= 5 && hours <= 10) {
-    // 6:00-11:00
+    // 6:00-11:59
     timeDayMsg += "Morning";
   } else if (hours <= 16) {
-    // 12:00-17:00
+    // 12:00-17:59
     timeDayMsg += "Afternoon";
   } else if (hours <= 22) {
-    // 18:00-23:00
+    // 18:00-23:59
     timeDayMsg += "Evening";
   } else {
-    // 00:00-5:00
+    // 00:00-5:59
     timeDayMsg += "Night";
   }
 
@@ -100,10 +100,9 @@ function HeaderMessage() {
     ", " +
     year;
 
+  // Random number to show a quote from a list.
   let randNum = Math.floor(Math.random() * (quotesLst.length - 1));
 
-  console.log(randNum);
-
-  let quote = (document.getElementById("headermessage").innerHTML =
-    timeDayMsg + " - " + quotesLst[1] + " - " + fullDateStr);
+  document.getElementById("headermessage").innerHTML =
+    timeDayMsg + " - " + quotesLst[randNum] + " - " + fullDateStr;
 }
