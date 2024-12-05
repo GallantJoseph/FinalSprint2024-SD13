@@ -222,6 +222,12 @@ function LoanPrep() {
   `;
   return;
 }
+function StoryPrep() {
+  document.getElementById("story").innerHTML = `
+  <button onclick="TellMeAStory()">Tell Me a Story</button>
+  `;
+  return;
+}
 
 function TellMeAStory() {
   // Prompt the user for input values to finish story
@@ -248,7 +254,7 @@ function TellMeAStory() {
     "winning with a record breaking time"
   );
 
-  // Generate the story with HTML formatting
+  // Display the story
   let story = `
     <h2>The race that would go down in history</h2>
 
@@ -258,8 +264,9 @@ function TellMeAStory() {
     As the countdown began, <b>${programmerName}</b> held their breath. The engines roared to life, and <b>${robotName}</b> raced forward, powered by the <b>${robotUpgrade}</b>.
     With precision and speed that defied logic, <b>${robotName}</b> outmaneuvered its competitors and crossed the finish line <b>${raceOutcome}</b>.
     Cheers erupted as <b>${programmerName}</b> realized that their programming and dedication had made history. The victory marked the beginning of a new era for robotics and racing.</p>
+    <br />
+	<button onclick="StoryPrep()">Clear</button>
   `;
 
-  // Display the story in the .maintopleft div
-  document.querySelector(".maintopleft").innerHTML = story;
+  document.getElementById("story").innerHTML = story;
 }
