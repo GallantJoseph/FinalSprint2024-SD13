@@ -1,7 +1,7 @@
 '''
 Names:
 Dates: Dec 04, 2024 - 
-Desc : Compination of all functions to be used in main.py
+Desc : Compilation of all functions to be used in main.py
 Note : The amount of J-names are very confusing o_o -Ashton
 '''
 
