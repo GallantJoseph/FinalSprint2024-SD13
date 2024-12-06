@@ -84,6 +84,9 @@ function DspHeaderMessage() {
 		"Hate to be that guy...",
 		"I just got lost in thought. It was unfamiliar territory.",
 		"Sometimes when I close my eyes, I can't see.",
+		"Time for crab",
+		"Time to mix drinks and change lives",
+		":3",
 	];
 
 	let currDate = new Date();
@@ -126,8 +129,8 @@ function DspHeaderMessage() {
 	console.log("Gamble rolled a", gamble);
 
 	/*/ If gamble rolls higher than a 20, chooses the normal quotes, else chooses the stupid quotes
-	    Equivalent to "chosenLst = quotesLst if gamble > 20 else stupidQuotesLst" in Python -Ashton /*/
-	let chosenLst = gamble > 20 ? quotesLst : stupidQuotesLst;
+	    Equivalent to "chosenLst = quotesLst if gamble > 25 else stupidQuotesLst" in Python -Ashton /*/
+	let chosenLst = gamble > 25 ? quotesLst : stupidQuotesLst;
 
 	// Random number to display a quote from a list.
 	let randNum = Math.floor(Math.random() * (chosenLst.length - 1));
