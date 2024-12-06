@@ -74,6 +74,7 @@ function DspHeaderMessage() {
 		"The happiness of your life depends upon the quality of your thoughts.",
 	];
 
+	// List of stupid quotes -Ashton
 	let stupidQuotesLst = [
 		"Nothing is impossible, unless you can't do it.",
 		"Why doesn't glue stick to the inside of the bottle?",
@@ -120,10 +121,14 @@ function DspHeaderMessage() {
 		", " +
 		year;
 
-	// 80% chance for a normal quote, 20% chance for a stupid quote
+	// 80% chance for a normal quote, 20% chance for a stupid quote -Ashton
 	let gamble = Math.floor(Math.random() * 100);
 	console.log("Gamble rolled a", gamble);
+
+	/*/ If gamble rolls higher than a 20, chooses the normal quotes, else chooses the stupid quotes
+	    Equivalent to "chosenLst = quotesLst if gamble > 20 else stupidQuotesLst" in Python -Ashton /*/
 	let chosenLst = gamble > 20 ? quotesLst : stupidQuotesLst;
+
 	// Random number to display a quote from a list.
 	let randNum = Math.floor(Math.random() * (chosenLst.length - 1));
 
