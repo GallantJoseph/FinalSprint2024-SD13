@@ -63,7 +63,7 @@ nav {
 
 main {
   width: 1000px;
-  height: 625px;
+  height: 675px;
   background-color: lightyellow;
 }
 
@@ -81,7 +81,7 @@ main {
 
 .mainright {
   width: 490px;
-  height: 610px;
+  height: 660px;
   background-color: lightgray;
   border: 1px solid black;
   padding: 10px;
