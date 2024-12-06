@@ -5,8 +5,11 @@ Desc : Compilation of all functions to be used in main.py
 Note : The amount of J-names are very confusing o_o -Ashton
 '''
 
+# Functions used across all classes
 from time import sleep
-from SharedFunctions import BackToMenu
+from SharedFunctions import BackToMenu, FormatValues as fv
+import sys
+import datetime as dt
 
 
 class AshFunctions:
@@ -22,17 +25,11 @@ class AshFunctions:
         exit(0) # temp until i make something funny
 
 class JoeyFunctions:
-    def compreve():
+    def CompanyRevenue():
         #I am Joey and I made this!!!1!11!1
         #This program will allow users to enter new 
         #revenue data information and save it to a file.
         #(rental info has to be input here too :P)
-
-        #Libraries (Probably a better way to do this in the file).
-        from SharedFunctions import FormatValues as fv
-        import datetime as dt
-        import sys
-        import time
 
         #Constants.
         f = open("Python/defaults.dat", "r")
@@ -209,7 +206,10 @@ class JoeyFunctions:
 
                     renCosHST = renCos * HST_RATE
                     renTotal = renCos + renCosHST
-
+            else:
+                # If the user chooses Own instead of Rented, renType is not defined and throws an error
+                # This is here to fix that -Ashton
+                renType = "N/A"
             #Output.
             print(f"\n\n==================================")
             print(f"New Revenue Addition:\n")
@@ -258,7 +258,7 @@ class JoeyFunctions:
             Message = "Saving Revenue Data..."
         
             for i in range(TotalIterations + 1):
-                time.sleep(0.1)
+                sleep(0.1)
                 ProBar(i, TotalIterations, prefix=Message, suffix='Complete', length=50)
             print()
         
@@ -280,7 +280,8 @@ class JoeyFunctions:
             con = input("\nWould You Like To Enter Another Transaction? (Y/N): ").upper()
             print()
             if con != "Y":
-                break
+                BackToMenu()
+                return
 
 class JustinFunctions:
     pass # Delete this line and paste your functions here
