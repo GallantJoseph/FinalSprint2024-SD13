@@ -281,8 +281,8 @@ function TellMeAStory() {
 	let story = `
     <h2>The race that would go down in history</h2>
 
-    <p>In a world where technology reigns supreme, <b>${programmerName}</b>, an expert coder and robotics enthusiast, had a dream... to create a robot capable of winning the most prestigious and exclusive race in the world.</p>
-    <p>The robot, named <b>${robotName}</b>, was built with cutting edge technology and given a special upgrade: <b>${robotUpgrade}</b>.
+    <p>In a world where technology reigns supreme, <b>${programmerName}</b>, an expert coder and robotics enthusiast, had a dream... to create a robot capable of winning the most prestigious and exclusive race in the world.
+    The robot, named <b>${robotName}</b>, was built with cutting edge technology and given a special upgrade: <b>${robotUpgrade}</b>.
     The race was set to take place in <b>${raceLocation}</b>, a place known for its challenging mazes and high speed straights. However, a formidable rival had emerged: <b>${raceChallenge}</b>.
     As the countdown began, <b>${programmerName}</b> held their breath. The engines roared to life, and <b>${robotName}</b> raced forward, powered by the <b>${robotUpgrade}</b>.
     With precision and speed that defied logic, <b>${robotName}</b> outmaneuvered its competitors and crossed the finish line <b>${raceOutcome}</b>.
