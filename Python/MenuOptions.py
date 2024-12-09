@@ -9,7 +9,7 @@ Note : The amount of J-names are very confusing o_o -Ashton
 from time import sleep
 from SharedFunctions import BackToMenu
 import SharedFunctions as sf
-import FormatValues as fv
+from SharedFunctions import FormatValues as fv 
 import datetime as dt
 import sys
 
