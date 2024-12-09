@@ -22,14 +22,14 @@ body {
 /* The header section. */
 header {
   width: 1000px;
-  height: 200px;
+  height: 205px;
   background-color: lightgreen;
 }
 
 /* The header is made up of a message bar and the banner image. */
 .tophead {
   width: 1000px;
-  height: 40px;
+  height: 45px;
   background-color: white;
   border-bottom: 3px solid gray;
 }
@@ -49,15 +49,48 @@ nav {
 .navleft {
   width: 493px;
   height: 45px;
-  background-color: orange;
+  background-color: white;
   float: left;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.navleft a {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18pt;
+  text-decoration: none;
+  margin-left: 25px;
+  margin-right: 25px;
+  display: block;
+  float: left;
+}
+
+.navleft a:hover {
+  text-decoration: none;
+  color: rgb(16, 16, 16);
+  transform: scale(115%);
+}
+
+.navleft a:link {
+  text-decoration: none;
+  color: rgb(16, 16, 16);
+}
+
+.navleft a:visited {
+  text-decoration: none;
+  color: rgb(16, 16, 16);
 }
 
 .navright {
   width: 495px;
   height: 45px;
-  background-color: orange;
+  font-family: "Courier New", Courier, monospace;
+  background-color: navy;
+  color: lightgray;
   margin-left: 5px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   float: right;
 }
 
@@ -133,10 +166,29 @@ th {
 
 #headertable {
   width: 100%;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 12pt;
+  height: 40px;
 }
 
 #headertable td {
-  padding: 10px 10px 0px 10px;
+  padding: 2px 5px 0px 5px;
+}
+
+#headertable .center {
+  width: 40%;
+  text-align: center;
+}
+
+#headertable .left {
+  width: 30%;
+  text-align: left;
+}
+
+#headertable .right {
+  width: 30%;
+  text-align: right;
 }
 
 button {
