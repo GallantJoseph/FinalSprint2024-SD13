@@ -128,7 +128,7 @@ function DspHeaderMessage() {
   let gamble = Math.floor(Math.random() * 100);
   console.log("Gamble rolled a", gamble);
 
-  /*/ If gamble rolls higher than a 20, chooses the normal quotes, else chooses the stupid quotes
+  /*/ If gamble rolls higher than a 25, chooses the normal quotes, else chooses the stupid quotes
 	    Equivalent to "chosenLst = quotesLst if gamble > 25 else stupidQuotesLst" in Python -Ashton /*/
   let chosenLst = gamble > 25 ? quotesLst : stupidQuotesLst;
 
@@ -140,7 +140,7 @@ function DspHeaderMessage() {
     "<table id='headertable'><tr><td class='leftalign'>" +
     timeDayMsg +
     "</td><td class='centeralign'>" +
-    quotesLst[randNum] +
+    chosenLst[randNum] +
     "</td><td class='rightalign'>" +
     fullDateStr +
     "</td></tr></table>";
