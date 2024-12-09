@@ -98,20 +98,20 @@ function DspHeaderMessage() {
   let hours = currDate.getHours();
 
   // Greeting for time of day.
-
   let timeDayMsg = "Good ";
-  if (hours >= 5 && hours <= 10) {
-    // 6:00-11:59
-    timeDayMsg += "Morning";
-  } else if (hours <= 16) {
-    // 12:00-17:59
-    timeDayMsg += "Afternoon";
-  } else if (hours <= 22) {
-    // 18:00-23:59
-    timeDayMsg += "Evening";
-  } else {
+
+  if (hours < 6) {
     // 00:00-5:59
     timeDayMsg += "Night";
+  } else if (hours <= 11) {
+    // 6:00-11:59
+    timeDayMsg += "Morning";
+  } else if (hours <= 17) {
+    // 12:00-17:59
+    timeDayMsg += "Afternoon";
+  } else {
+    // 18:00-23:59
+    timeDayMsg += "Evening";
   }
 
   // Date string as Day, Month Date, YYYY
