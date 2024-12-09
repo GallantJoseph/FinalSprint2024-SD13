@@ -7,8 +7,8 @@ Note : The amount of J-names are very confusing o_o -Ashton
 
 from time import sleep
 from SharedFunctions import BackToMenu
-import SharedFunctions as SF
-import datetime as DT
+import SharedFunctions as sf
+import datetime as dt
 
 
 class AshFunctions:
@@ -72,7 +72,7 @@ class JosephFunctions:
             startDate = input("Enter the start date (YYYY-MM-DD): ")
 
             try:
-                startDate = DT.datetime.strptime(startDate, "%Y-%m-%d")
+                startDate = dt.datetime.strptime(startDate, "%Y-%m-%d")
             except:
                 print()
                 print("Data Entry Error - Invalid Date Format. ")
@@ -85,7 +85,7 @@ class JosephFunctions:
             endDate = input("Enter the end date (YYYY-MM-DD): ")
 
             try:
-                endDate = DT.datetime.strptime(endDate, "%Y-%m-%d")
+                endDate = dt.datetime.strptime(endDate, "%Y-%m-%d")
             except:
                 print()
                 print("Data Entry Error - Invalid Date Format. ")
@@ -103,18 +103,19 @@ class JosephFunctions:
         print(f"HAB Taxi Services")
         print(f"     {strAddr:<30s}")
         print(f"     {city}, {prov:<2s}")
-        print(f"     {SF.FormatValues.FormatPostalCode(postalCode):<7s}")
+        print(f"     {sf.FormatValues.FormatPostalCode(postalCode):<7s}")
         print()
-        print(f"     Phone: {SF.FormatValues.FormatPhone(phone):<14s}")
+        print(f"     Phone: {sf.FormatValues.FormatPhone(phone):<14s}")
         print(f"     Email: {email:<23s}")
         print()
 
         # Print the financial report
+        print()
         print(f"Financial Report")
         print(f"----------------")
         print()
         print(f"Revenues")
-        print(f"Listing from {SF.FormatValues.FormatDateShort(startDate):<10s} to {SF.FormatValues.FormatDateShort(endDate):<10s}")
+        print(f"Listing from {sf.FormatValues.FormatDateShort(startDate):<10s} to {sf.FormatValues.FormatDateShort(endDate):<10s}")
         print()
         print(f"Transaction    Transaction           Description            Subtotal         HST           Total")
         print(f"    ID            Date")
@@ -129,7 +130,7 @@ class JosephFunctions:
             revenueRecord = revenue.split(",")
 
             transactId = revenueRecord[0]
-            transactDate = DT.datetime.strptime(revenueRecord[1].strip(), "%Y-%m-%d")
+            transactDate = dt.datetime.strptime(revenueRecord[1].strip(), "%Y-%m-%d")
             transactDesc = revenueRecord[2].strip()
             subTot = float(revenueRecord[3].strip())
             hst = float(revenueRecord[4].strip())
@@ -145,18 +146,18 @@ class JosephFunctions:
                 # Print each revenue transaction
                 # Transaction ID, Transaction Date, Description, Subtotal, HST, Total
 
-                print(f"  {transactId:<5s}        {SF.FormatValues.FormatDateShort(transactDate):<10s}   {transactDesc:<30s}  {SF.FormatValues.FormatDollar2(subTot):>9s}      {SF.FormatValues.FormatDollar2(hst):>7s}      {SF.FormatValues.FormatDollar2(tot):>10s}")
+                print(f"  {transactId:<5s}        {sf.FormatValues.FormatDateShort(transactDate):<10s}   {transactDesc:<30s}  {sf.FormatValues.FormatDollar2(subTot):>9s}      {sf.FormatValues.FormatDollar2(hst):>7s}      {sf.FormatValues.FormatDollar2(tot):>10s}")
 
         # Close the file
         f.close()
 
         print(f"---------------------------------------------------------------------------------------------------")
-        print(f"                                                          {SF.FormatValues.FormatDollar2(revenuesSubTot):>11s}   {SF.FormatValues.FormatDollar2(revenuesHst):>10s}   {SF.FormatValues.FormatDollar2(revenuesTot):>13s}")
+        print(f"                                                          {sf.FormatValues.FormatDollar2(revenuesSubTot):>11s}   {sf.FormatValues.FormatDollar2(revenuesHst):>10s}   {sf.FormatValues.FormatDollar2(revenuesTot):>13s}")
         print(f"Number of transactions: {revenuesCtr:>3d}")
         print()
         print()
         print(f"Expenses")
-        print(f"Listing from {SF.FormatValues.FormatDateShort(startDate):<10s} to {SF.FormatValues.FormatDateShort(endDate):<10s}")
+        print(f"Listing from {sf.FormatValues.FormatDateShort(startDate):<10s} to {sf.FormatValues.FormatDateShort(endDate):<10s}")
         print()
         print(f"Expense   Invoice   Item              Item                Item        Qty     HST         Total")
         print(f"  ID      Number    Number         Description            Cost                            Cost")
@@ -181,7 +182,7 @@ class JosephFunctions:
             itemTot = float(expenseRecord[7].strip())
 
             # TODO: Add a field/variable in the file, find a way to display it somewhere
-            expenseDate = DT.datetime.strptime("2024-10-10", "%Y-%m-%d")
+            expenseDate = dt.datetime.strptime("2024-10-10", "%Y-%m-%d")
 
             # Check if the date is within the range, and if so, print the transaction and increment the counters and accumulators
             if expenseDate >= startDate and expenseDate <= endDate:
@@ -194,13 +195,13 @@ class JosephFunctions:
                 # Print each expense transaction
                 # Expense ID, Invoice Number, Item Number, Item Description, Item Cost, Quantity, HST, Total Cost
 
-                print(f" {expenseId:<5s}    {invNum:<6s}    {itemNum:<7s}   {itemDesc:<22s}   {SF.FormatValues.FormatDollar2(itemCost):>10s}     {itemQty:>3d}  {SF.FormatValues.FormatDollar2(itemHst):>9s}    {SF.FormatValues.FormatDollar2(itemTot):>10s} ")
+                print(f" {expenseId:<5s}    {invNum:<6s}    {itemNum:<7s}   {itemDesc:<22s}   {sf.FormatValues.FormatDollar2(itemCost):>10s}     {itemQty:>3d}  {sf.FormatValues.FormatDollar2(itemHst):>9s}    {sf.FormatValues.FormatDollar2(itemTot):>10s} ")
 
         # Close the file
         f.close()
         
         print(f"---------------------------------------------------------------------------------------------------")
-        print(f"                                                    {SF.FormatValues.FormatDollar2(expensesSubTot):>13s}     {SF.FormatValues.FormatDollar2(expensesHst):>11s}    {SF.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print(f"                                                    {sf.FormatValues.FormatDollar2(expensesSubTot):>13s}     {sf.FormatValues.FormatDollar2(expensesHst):>11s}    {sf.FormatValues.FormatDollar2(expensesTot):>13s}")
         print(f"                                                      (Subtotal)         (HST)          (Total)")
         print(f"Number of transactions: {expensesCtr:>3d}")
         print()
@@ -209,27 +210,27 @@ class JosephFunctions:
         print(f"-------------")
         print()
         print(f"Revenues")
-        print(f"     Subtotal:        {SF.FormatValues.FormatDollar2(revenuesSubTot):>11s}")
-        print(f"     HST:              {SF.FormatValues.FormatDollar2(revenuesHst):>10s}")
+        print(f"     Subtotal:        {sf.FormatValues.FormatDollar2(revenuesSubTot):>11s}")
+        print(f"     HST:              {sf.FormatValues.FormatDollar2(revenuesHst):>10s}")
         print(f"                    -------------")
-        print(f"     Total:         {SF.FormatValues.FormatDollar2(revenuesTot):>13s}")
+        print(f"     Total:         {sf.FormatValues.FormatDollar2(revenuesTot):>13s}")
         print()
         print()
         print(f"Expenses")
-        print(f"     Subtotal:        {SF.FormatValues.FormatDollar2(expensesSubTot):>11s}")
-        print(f"     HST:              {SF.FormatValues.FormatDollar2(expensesHst):>10s}")
+        print(f"     Subtotal:        {sf.FormatValues.FormatDollar2(expensesSubTot):>11s}")
+        print(f"     HST:              {sf.FormatValues.FormatDollar2(expensesHst):>10s}")
         print(f"                    -------------")
-        print(f"     Total:         {SF.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print(f"     Total:         {sf.FormatValues.FormatDollar2(expensesTot):>13s}")
         print()
         print()
-        print(f"Revenues Total:     {SF.FormatValues.FormatDollar2(revenuesTot):>13s}")
-        print(f"Expenses Total:    -{SF.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print(f"Revenues Total:     {sf.FormatValues.FormatDollar2(revenuesTot):>13s}")
+        print(f"Expenses Total:    -{sf.FormatValues.FormatDollar2(expensesTot):>13s}")
         print(f"                    -------------")
 
         # Calculate the profit margin
         profitMargin = revenuesTot - expensesTot
 
-        print(f"Profit Margin:      {SF.FormatValues.FormatDollar2(profitMargin):>13s}")
+        print(f"Profit Margin:      {sf.FormatValues.FormatDollar2(profitMargin):>13s}")
         print()
         print()
         input("Press Enter to Return to the Main Menu...")
