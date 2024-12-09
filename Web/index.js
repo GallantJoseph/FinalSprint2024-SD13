@@ -180,10 +180,22 @@ async function RightNavDsp() {
   // Author: Joseph Gallant
   // Dates: Dec. 9, 2024 -
 
+  let runStr = "";
   let dspString = "";
 
   while (true) {
-    for (let i = 0; i < 45; i++) {
+    // Build the RUN string for display
+    runStr += "R";
+    await sleep(250);
+    document.getElementById("runcommand").innerHTML = runStr;
+    runStr += "U";
+    await sleep(250);
+    document.getElementById("runcommand").innerHTML = runStr;
+    runStr += "N";
+    await sleep(250);
+    document.getElementById("runcommand").innerHTML = runStr;
+
+    for (let i = 0; i < 40; i++) {
       dspString += ".";
 
       await sleep(150);
@@ -196,6 +208,15 @@ async function RightNavDsp() {
       await sleep(150);
 
       document.getElementById("navrightmsg").innerHTML = dspString;
+    }
+
+    // Remove the end characters from RUN string for display
+    for (let i = runStr.length - 1; i >= 0; i--) {
+      runStr = runStr.slice(0, i);
+
+      await sleep(150);
+
+      document.getElementById("runcommand").innerHTML = runStr;
     }
   }
 }
