@@ -80,6 +80,13 @@ class FormatValues:
         '''Function will accept a value as a 10 digit Phone Number and format it'''
 
         return f"({phone[0:3]}) {phone[3:6]}-{phone[6:10]}"
+    
+    def FormatPostalCode(postalCode):
+        '''Function that formats a postal code in the X#X #X# format.'''
+
+        formPostalCode = postalCode[0:3] + " " + postalCode[3:6]
+
+        return formPostalCode
 
 def clear():
     system("cls" if name == "nt" else "clear")
