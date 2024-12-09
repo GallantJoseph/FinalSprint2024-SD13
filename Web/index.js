@@ -112,8 +112,17 @@ function DspHeaderMessage() {
   // Random number to display a quote from a list.
   let randNum = Math.floor(Math.random() * (quotesLst.length - 1));
 
-  document.getElementById("headermessage").innerHTML =
-    timeDayMsg + " - " + quotesLst[randNum] + " - " + fullDateStr;
+  // Table for headermessage
+  let headermessage =
+    "<table id='headertable'><tr><td class='leftalign'>" +
+    timeDayMsg +
+    "</td><td class='centeralign'>" +
+    quotesLst[randNum] +
+    "</td><td class='rightalign'>" +
+    fullDateStr +
+    "</td></tr></table>";
+
+  document.getElementById("headermessage").innerHTML = headermessage;
 }
 
 // Slideshow function and code! :D

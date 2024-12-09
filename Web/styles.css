@@ -113,6 +113,10 @@ footer {
   text-align: right;
 }
 
+.leftalign {
+  text-align: left;
+}
+
 .centeralign {
   text-align: center;
 }
@@ -125,6 +129,14 @@ table {
 td,
 th {
   padding: 0px 15px;
+}
+
+#headertable {
+  width: 100%;
+}
+
+#headertable td {
+  padding: 10px 10px 0px 10px;
 }
 
 button {
