@@ -98,20 +98,20 @@ function DspHeaderMessage() {
   let hours = currDate.getHours();
 
   // Greeting for time of day.
-
   let timeDayMsg = "Good ";
-  if (hours >= 5 && hours <= 10) {
-    // 6:00-11:59
-    timeDayMsg += "Morning";
-  } else if (hours <= 16) {
-    // 12:00-17:59
-    timeDayMsg += "Afternoon";
-  } else if (hours <= 22) {
-    // 18:00-23:59
-    timeDayMsg += "Evening";
-  } else {
+
+  if (hours < 6) {
     // 00:00-5:59
     timeDayMsg += "Night";
+  } else if (hours <= 11) {
+    // 6:00-11:59
+    timeDayMsg += "Morning";
+  } else if (hours <= 17) {
+    // 12:00-17:59
+    timeDayMsg += "Afternoon";
+  } else {
+    // 18:00-23:59
+    timeDayMsg += "Evening";
   }
 
   // Date string as Day, Month Date, YYYY
@@ -128,7 +128,7 @@ function DspHeaderMessage() {
   let gamble = Math.floor(Math.random() * 100);
   console.log("Gamble rolled a", gamble);
 
-  /*/ If gamble rolls higher than a 20, chooses the normal quotes, else chooses the stupid quotes
+  /*/ If gamble rolls higher than a 25, chooses the normal quotes, else chooses the stupid quotes
 	    Equivalent to "chosenLst = quotesLst if gamble > 25 else stupidQuotesLst" in Python -Ashton /*/
   let chosenLst = gamble > 25 ? quotesLst : stupidQuotesLst;
 
@@ -140,7 +140,7 @@ function DspHeaderMessage() {
     "<table id='headertable'><tr><td class='leftalign'>" +
     timeDayMsg +
     "</td><td class='centeralign'>" +
-    quotesLst[randNum] +
+    chosenLst[randNum] +
     "</td><td class='rightalign'>" +
     fullDateStr +
     "</td></tr></table>";
