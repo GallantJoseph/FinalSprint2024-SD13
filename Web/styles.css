@@ -84,8 +84,13 @@ nav {
 .navright {
   width: 495px;
   height: 45px;
-  background-color: orange;
+  font-family: "Courier New", Courier, monospace;
+  background-color: navy;
+  color: lightgray;
   margin-left: 5px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   float: right;
 }
 

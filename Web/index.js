@@ -34,7 +34,7 @@ const dateFormat = new Intl.DateTimeFormat("en-CA", {
 function DspHeaderMessage() {
   // Desc: Display the header message.
   // Author: Joseph Gallant
-  // Dates: Dec. 3, 2024 - Dec. 4, 2024
+  // Dates: Dec. 3, 2024 - Dec. 9, 2024
 
   // Define the lists for days of the week and months.
   let daysOfWeekLst = [
@@ -140,9 +140,9 @@ function DspHeaderMessage() {
     "<table id='headertable'><tr><td class='left'>" +
     timeDayMsg +
     "</td><td class='center'>" +
-    "-" +
+    "-&nbsp;" +
     chosenLst[randNum] +
-    "-" +
+    "&nbsp;-" +
     "</td><td class='right'>" +
     fullDateStr +
     "</td></tr></table>";
@@ -168,6 +168,49 @@ function gallery() {
   } else {
     step = 0;
   }
+}
+
+// Function that allow pauses
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function RightNavDsp() {
+  // Desc: Function for the right navigation section.
+  // Author: Joseph Gallant
+  // Dates: Dec. 9, 2024 -
+
+  let dspString = "";
+
+  while (true) {
+    for (let i = 0; i < 45; i++) {
+      dspString += ".";
+
+      await sleep(150);
+      document.getElementById("navrightmsg").innerHTML = dspString;
+    }
+
+    for (let i = dspString.length - 1; i >= 0; i--) {
+      dspString = dspString.slice(0, i);
+
+      await sleep(150);
+
+      document.getElementById("navrightmsg").innerHTML = dspString;
+    }
+  }
+}
+
+// Ready cursor blinking code
+window.onload = setInterval(ReadyCursor, 500);
+let readyCursorCtr = true;
+
+async function ReadyCursor() {
+  if (readyCursorCtr) {
+    document.getElementById("readycursor").innerHTML = "&#9632;";
+  } else {
+    document.getElementById("readycursor").innerHTML = "&#9633;";
+  }
+  readyCursorCtr = !readyCursorCtr;
 }
 
 function TitleCase(str) {
