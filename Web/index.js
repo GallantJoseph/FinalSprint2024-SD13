@@ -89,7 +89,7 @@ function DspHeaderMessage() {
     ":3",
   ];
 
-  let currDate = new Date(2024, 8, 25);
+  let currDate = new Date();
 
   let year = currDate.getFullYear();
   let month = currDate.getMonth();
