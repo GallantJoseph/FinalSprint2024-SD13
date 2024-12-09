@@ -53,9 +53,7 @@ class JosephFunctions:
         expensesHst = 0.0
         expensesTot = 0.0
 
-        # Print the headings
-
-
+        # Initialize the variables (TODO: From defaults file?)
         strAddr = "123 Main Street"
         city = "St. John's"
         prov = "NL"
@@ -67,13 +65,7 @@ class JosephFunctions:
         startDate = DT.datetime.strptime("2024-10-10", "%Y-%m-%d")
         endDate = DT.datetime.strptime("2024-11-10", "%Y-%m-%d")
 
-        # Trans.ID, Trans. Date, Desc., SubTotal, HST, Total
-        revenuesLst = []
-
-        # Build a temporary list for testing purposes
-        for listIndex in range(1,6):
-            revenuesLst.append(["12345", "2024-10-11", f"Description Trans. {listIndex:2d}", 1234.33, 185.15, 1419.48])
-
+        # Print the headings
         print()
         print(f"HAB Taxi Services")
         print(f"     {strAddr:<30s}")
@@ -83,6 +75,8 @@ class JosephFunctions:
         print(f"     Phone: {SF.FormatValues.FormatPhone(phone):<14s}")
         print(f"     Email: {email:<23s}")
         print()
+
+        # Print the financial report
         print(f"Financial Report")
         print(f"----------------")
         print()
@@ -93,37 +87,41 @@ class JosephFunctions:
         print(f"    ID            Date")
         print(f"---------------------------------------------------------------------------------------------------")
 
-        # Print each revenue transaction
-        # Transaction ID, Transaction Date, Description, Subtotal, HST, Total
-        for listItem in revenuesLst:
-            revenuesCtr += 1
+        # Open the file to read the revenues data
+        f = open("Revenues.dat")
 
-            transactId = listItem[0]
-            transactDate = DT.datetime.strptime(listItem[1], "%Y-%m-%d")
-            transactDesc = listItem[2]
-            subTot = float(listItem[3])
-            hst = float(listItem[4])
-            tot = float(listItem[5])
+        # Print the revenue records that satisfy the conditions
+        for revenue in f:
+            # Trans.ID, Trans. Date, Desc., SubTotal, HST, Total
+            revenueRecord = revenue.split(",")
 
-            print(f"  {transactId:<5s}        {SF.FormatValues.FormatDateShort(transactDate):<10s}   {transactDesc:<30s}  {SF.FormatValues.FormatDollar2(subTot):>9s}      {SF.FormatValues.FormatDollar2(hst):>7s}      {SF.FormatValues.FormatDollar2(tot):>10s}")
+            transactId = revenueRecord[0]
+            transactDate = DT.datetime.strptime(revenueRecord[1].strip(), "%Y-%m-%d")
+            transactDesc = revenueRecord[2].strip()
+            subTot = float(revenueRecord[3].strip())
+            hst = float(revenueRecord[4].strip())
+            tot = float(revenueRecord[5].strip())
 
-            revenuesSubTot += subTot
-            revenuesHst += hst
-            revenuesTot += tot
+            # Check if the date is within the range, and if so, print the transaction and increment the counters and accumulators
+            if transactDate >= startDate and transactDate <= endDate:
+                revenuesCtr += 1
+
+                revenuesSubTot += subTot
+                revenuesHst += hst
+                revenuesTot += tot
+                # Print each revenue transaction
+                # Transaction ID, Transaction Date, Description, Subtotal, HST, Total
+
+                print(f"  {transactId:<5s}        {SF.FormatValues.FormatDateShort(transactDate):<10s}   {transactDesc:<30s}  {SF.FormatValues.FormatDollar2(subTot):>9s}      {SF.FormatValues.FormatDollar2(hst):>7s}      {SF.FormatValues.FormatDollar2(tot):>10s}")
+
+        # Close the file
+        f.close()
 
         print(f"---------------------------------------------------------------------------------------------------")
         print(f"                                                          {SF.FormatValues.FormatDollar2(revenuesSubTot):>11s}   {SF.FormatValues.FormatDollar2(revenuesHst):>10s}   {SF.FormatValues.FormatDollar2(revenuesTot):>13s}")
         print(f"Number of transactions: {revenuesCtr:>3d}")
         print()
         print()
-
-        # Trans.ID, Trans. Date, Desc., SubTotal, HST, Total
-        expensesLst = []
-       
-        # Build a temporary list for testing purposes
-        for listIndex in range(1,6):
-            expensesLst.append(["12345", "234567", "3456789", f"Description Trans. {listIndex:2d}", 1234.33, 3, 555.45, 4258.44])
-
         print(f"Expenses")
         print(f"Listing from {SF.FormatValues.FormatDateShort(startDate):<10s} to {SF.FormatValues.FormatDateShort(endDate):<10s}")
         print()
@@ -131,32 +129,46 @@ class JosephFunctions:
         print(f"  ID      Number    Number         Description            Cost                            Cost")
         print(f"---------------------------------------------------------------------------------------------------")
 
-        # Print each expense transaction
-        # Expense ID, Invoice Number, Item Number, Item Description, Item Cost, Quantity, HST, Total Cost
+        # Open the file to read the expenses data
+        f = open("Expenses.dat")
 
-        for listItem in expensesLst:
-            expensesCtr += 1
+        # Print the revenue records that satisfy the conditions
+        for expense in f:
+            # Expense ID, Invoice Number, Item Number, Item Description, Item Cost, Quantity, HST, Total Cost
+            expenseRecord = expense.split(",")
 
-            expenseId = listItem[0]
-            invNum = listItem[1]
-            itemNum = listItem[2]
-            itemDesc = listItem[3]
-            itemCost = float(listItem[4])
-            itemQty = int(listItem[5])
-            itemSubTot = itemQty * itemCost
-            itemHst = float(listItem[6])
-            itemTot = float(listItem[7])
+            expenseId = expenseRecord[0].strip()
+            invNum = expenseRecord[1].strip()
+            itemNum = expenseRecord[2].strip()
+            itemDesc = expenseRecord[3].strip()
+            itemCost = float(expenseRecord[4].strip())
+            itemQty = int(expenseRecord[5].strip())
+            itemSubTot = itemQty * itemCost # TODO, add this value to the file instead
+            itemHst = float(expenseRecord[6].strip())
+            itemTot = float(expenseRecord[7].strip())
 
-            print(f" {expenseId:<5s}    {invNum:<6s}    {itemNum:<7s}   {itemDesc:<22s}   {SF.FormatValues.FormatDollar2(itemCost):>10s}     {itemQty:>3d}  {SF.FormatValues.FormatDollar2(itemHst):>9s}    {SF.FormatValues.FormatDollar2(itemTot):>10s} ")
-            expensesSubTot += itemSubTot
-            expensesHst += itemHst
-            expensesTot += itemTot
+            # TODO: Add a field/variable in the file, find a way to display it somewhere
+            expenseDate = DT.datetime.strptime("2024-10-10", "%Y-%m-%d")
 
+            # Check if the date is within the range, and if so, print the transaction and increment the counters and accumulators
+            if expenseDate >= startDate and expenseDate <= endDate:
+                expensesCtr+=1
+
+                expensesSubTot += itemSubTot
+                expensesHst += itemHst
+                expensesTot += itemTot
+
+                # Print each expense transaction
+                # Expense ID, Invoice Number, Item Number, Item Description, Item Cost, Quantity, HST, Total Cost
+
+                print(f" {expenseId:<5s}    {invNum:<6s}    {itemNum:<7s}   {itemDesc:<22s}   {SF.FormatValues.FormatDollar2(itemCost):>10s}     {itemQty:>3d}  {SF.FormatValues.FormatDollar2(itemHst):>9s}    {SF.FormatValues.FormatDollar2(itemTot):>10s} ")
+
+        # Close the file
+        f.close()
         
         print(f"---------------------------------------------------------------------------------------------------")
         print(f"                                                    {SF.FormatValues.FormatDollar2(expensesSubTot):>13s}     {SF.FormatValues.FormatDollar2(expensesHst):>11s}    {SF.FormatValues.FormatDollar2(expensesTot):>13s}")
         print(f"                                                      (Subtotal)         (HST)          (Total)")
-        print()
         print(f"Number of transactions: {expensesCtr:>3d}")
         print()
         print()
@@ -168,11 +180,26 @@ class JosephFunctions:
         print(f"     HST:              {SF.FormatValues.FormatDollar2(revenuesHst):>10s}")
         print(f"                    -------------")
         print(f"     Total:         {SF.FormatValues.FormatDollar2(revenuesTot):>13s}")
+        print()
+        print()
+        print(f"Expenses")
+        print(f"     Subtotal:        {SF.FormatValues.FormatDollar2(expensesSubTot):>11s}")
+        print(f"     HST:              {SF.FormatValues.FormatDollar2(expensesHst):>10s}")
+        print(f"                    -------------")
+        print(f"     Total:         {SF.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print()
+        print()
+        print(f"Revenues Total:     {SF.FormatValues.FormatDollar2(revenuesTot):>13s}")
+        print(f"Expenses Total:    -{SF.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print(f"                    -------------")
 
+        # Calculate the profit margin
+        profitMargin = revenuesTot - expensesTot
 
-
-
-        input("Pause...")
+        print(f"Profit Margin:      {SF.FormatValues.FormatDollar2(profitMargin):>13s}")
+        print()
+        print()
+        input("Press Enter to Return to the Main Menu...")
 
 
 class MichaelFunctions:
