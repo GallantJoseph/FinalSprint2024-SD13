@@ -33,7 +33,7 @@ while True:
             print("Opening...")
             sleep(1.5)
             clear()
-            AshFunctions.placeholder()
+            JoeyFunctions.CompanyRevenue()
         case "3":
             clear()
             print("Opening...")
@@ -57,7 +57,7 @@ while True:
             print("Opening...")
             sleep(1.5)
             clear()
-            AshFunctions.placeholder()
+            JosephFunctions.CompanyProfitListing()
         case "7":
             clear()
             print("Opening...")
