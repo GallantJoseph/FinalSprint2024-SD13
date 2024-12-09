@@ -40,8 +40,6 @@ class JosephFunctions:
         Dates: Dec. 5, 2024 - 
         '''
 
-        # Read the informations from files
-
         # Initialize counters and accumulators
         revenuesCtr = 0
         revenuesSubTot = 0.0
@@ -61,11 +59,46 @@ class JosephFunctions:
         phone = "7095554227" # HABS
         email = "service@habtaxi.com"
 
-        # TODO Remove testing variables and use input instead
-        startDate = DT.datetime.strptime("2024-10-10", "%Y-%m-%d")
-        endDate = DT.datetime.strptime("2024-11-10", "%Y-%m-%d")
+        # Print the program headings
+        print()
+        print("                             HAB Taxi Services - Company Profit Listing")
+        print(f"---------------------------------------------------------------------------------------------------")
+        print()
 
-        # Print the headings
+        # Gather the date range values for the listing
+
+        # Validate the startDate
+        while True:
+            startDate = input("Enter the start date (YYYY-MM-DD): ")
+
+            try:
+                startDate = DT.datetime.strptime(startDate, "%Y-%m-%d")
+            except:
+                print()
+                print("Data Entry Error - Invalid Date Format. ")
+                print()
+            else:
+                break
+
+        # Validate the endDate
+        while True:
+            endDate = input("Enter the end date (YYYY-MM-DD): ")
+
+            try:
+                endDate = DT.datetime.strptime(endDate, "%Y-%m-%d")
+            except:
+                print()
+                print("Data Entry Error - Invalid Date Format. ")
+                print()
+            else:
+                if endDate < startDate:
+                    print()
+                    print("Data Entry Error - End Date Must Be After Start Date")
+                    print()
+                else:
+                    break
+
+        # Print the report headings
         print()
         print(f"HAB Taxi Services")
         print(f"     {strAddr:<30s}")
