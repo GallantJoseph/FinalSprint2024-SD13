@@ -74,6 +74,21 @@ function DspHeaderMessage() {
     "The happiness of your life depends upon the quality of your thoughts.",
   ];
 
+  // List of stupid quotes -Ashton
+  let stupidQuotesLst = [
+    "Nothing is impossible, unless you can't do it.",
+    "Why doesn't glue stick to the inside of the bottle?",
+    "Don't expect the unexpected unless the unexpected expects you.",
+    "This statement is false.",
+    "I don't suffer from insanity... I enjoy every minute of it!",
+    "Hate to be that guy...",
+    "I just got lost in thought. It was unfamiliar territory.",
+    "Sometimes when I close my eyes, I can't see.",
+    "Time for crab",
+    "Time to mix drinks and change lives",
+    ":3",
+  ];
+
   let currDate = new Date();
 
   let year = currDate.getFullYear();
@@ -109,11 +124,19 @@ function DspHeaderMessage() {
     ", " +
     year;
 
+  // 80% chance for a normal quote, 20% chance for a stupid quote -Ashton
+  let gamble = Math.floor(Math.random() * 100);
+  console.log("Gamble rolled a", gamble);
+
+  /*/ If gamble rolls higher than a 20, chooses the normal quotes, else chooses the stupid quotes
+	    Equivalent to "chosenLst = quotesLst if gamble > 25 else stupidQuotesLst" in Python -Ashton /*/
+  let chosenLst = gamble > 25 ? quotesLst : stupidQuotesLst;
+
   // Random number to display a quote from a list.
-  let randNum = Math.floor(Math.random() * (quotesLst.length - 1));
+  let randNum = Math.floor(Math.random() * (chosenLst.length - 1));
 
   document.getElementById("headermessage").innerHTML =
-    timeDayMsg + " - " + quotesLst[randNum] + " - " + fullDateStr;
+    timeDayMsg + " - " + chosenLst[randNum] + " - " + fullDateStr;
 }
 
 // Slideshow function and code! :D
@@ -258,8 +281,8 @@ function TellMeAStory() {
   let story = `
     <h2>The race that would go down in history</h2>
 
-    <p>In a world where technology reigns supreme, <b>${programmerName}</b>, an expert coder and robotics enthusiast, had a dream... to create a robot capable of winning the most prestigious and exclusive race in the world.</p>
-    <p>The robot, named <b>${robotName}</b>, was built with cutting edge technology and given a special upgrade: <b>${robotUpgrade}</b>.
+    <p>In a world where technology reigns supreme, <b>${programmerName}</b>, an expert coder and robotics enthusiast, had a dream... to create a robot capable of winning the most prestigious and exclusive race in the world.
+    The robot, named <b>${robotName}</b>, was built with cutting edge technology and given a special upgrade: <b>${robotUpgrade}</b>.
     The race was set to take place in <b>${raceLocation}</b>, a place known for its challenging mazes and high speed straights. However, a formidable rival had emerged: <b>${raceChallenge}</b>.
     As the countdown began, <b>${programmerName}</b> held their breath. The engines roared to life, and <b>${robotName}</b> raced forward, powered by the <b>${robotUpgrade}</b>.
     With precision and speed that defied logic, <b>${robotName}</b> outmaneuvered its competitors and crossed the finish line <b>${raceOutcome}</b>.
