@@ -59,7 +59,7 @@ class JosephFunctions:
         prov = "NL"
         postalCode = "A2C4E6"
         phone = "7095554227" # HABS
-        email = "service@habstaxi.com"
+        email = "service@habtaxi.com"
 
         # TODO Remove testing variables and use input instead
         startDate = DT.datetime.strptime("2024-10-10", "%Y-%m-%d")
