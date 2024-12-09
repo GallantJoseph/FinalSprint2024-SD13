@@ -89,7 +89,7 @@ function DspHeaderMessage() {
     ":3",
   ];
 
-  let currDate = new Date();
+  let currDate = new Date(2024, 8, 25);
 
   let year = currDate.getFullYear();
   let month = currDate.getMonth();
@@ -124,7 +124,7 @@ function DspHeaderMessage() {
     ", " +
     year;
 
-  // 80% chance for a normal quote, 20% chance for a stupid quote -Ashton
+  // 75% chance for a normal quote, 25% chance for a stupid quote -Ashton
   let gamble = Math.floor(Math.random() * 100);
   console.log("Gamble rolled a", gamble);
 
@@ -137,11 +137,13 @@ function DspHeaderMessage() {
 
   // Table for headermessage
   let headermessage =
-    "<table id='headertable'><tr><td class='leftalign'>" +
+    "<table id='headertable'><tr><td class='left'>" +
     timeDayMsg +
-    "</td><td class='centeralign'>" +
+    "</td><td class='center'>" +
+    "-" +
     chosenLst[randNum] +
-    "</td><td class='rightalign'>" +
+    "-" +
+    "</td><td class='right'>" +
     fullDateStr +
     "</td></tr></table>";
 
