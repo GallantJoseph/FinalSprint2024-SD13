@@ -286,7 +286,7 @@ function TellMeAStory() {
     The race was set to take place in <b>${raceLocation}</b>, a place known for its challenging mazes and high speed straights. However, a formidable rival had emerged: <b>${raceChallenge}</b>.
     As the countdown began, <b>${programmerName}</b> held their breath. The engines roared to life, and <b>${robotName}</b> raced forward, powered by the <b>${robotUpgrade}</b>.
     With precision and speed that defied logic, <b>${robotName}</b> outmaneuvered its competitors and crossed the finish line <b>${raceOutcome}</b>.
-    Cheers erupted as <b>${programmerName}</b> realized that their programming and dedication had made history. The victory marked the beginning of a new era for robotics and racing.</p>
+    </p>
     <br />
 	<button onclick="StoryPrep()">Clear</button>
   `;
