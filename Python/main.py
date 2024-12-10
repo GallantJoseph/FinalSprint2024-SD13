@@ -1,7 +1,7 @@
 """
-Description:
-Authors:
-Dates:
+Description: The Main program. Run this one when testing. This contains the main menu and calls the options from the MenuOptions file
+Authors: 
+Dates: Dec 1st, 2024 - 
 """
 from SharedFunctions import clear
 from MenuOptions import *

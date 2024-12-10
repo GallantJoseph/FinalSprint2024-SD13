@@ -7,9 +7,7 @@ Note : The amount of J-names are very confusing o_o -Ashton
 
 # Functions used across all classes
 from time import sleep
-from SharedFunctions import BackToMenu
-import SharedFunctions as sf
-import FormatValues as fv
+from SharedFunctions import BackToMenu, FormatValues as fv
 import datetime as dt
 import sys
 
@@ -362,9 +360,9 @@ class JosephFunctions:
         print(f"HAB Taxi Services")
         print(f"     {strAddr:<30s}")
         print(f"     {city}, {prov:<2s}")
-        print(f"     {sf.FormatValues.FormatPostalCode(postalCode):<7s}")
+        print(f"     {fv.FormatPostalCode(postalCode):<7s}")
         print()
-        print(f"     Phone: {sf.FormatValues.FormatPhone(phone):<14s}")
+        print(f"     Phone: {fv.FormatPhone(phone):<14s}")
         print(f"     Email: {email:<23s}")
         print()
 
@@ -374,14 +372,14 @@ class JosephFunctions:
         print(f"----------------")
         print()
         print(f"Revenues")
-        print(f"Listing from {sf.FormatValues.FormatDateShort(startDate):<10s} to {sf.FormatValues.FormatDateShort(endDate):<10s}")
+        print(f"Listing from {fv.FormatDateShort(startDate):<10s} to {fv.FormatDateShort(endDate):<10s}")
         print()
         print(f"Transaction    Transaction           Description            Subtotal         HST           Total")
         print(f"    ID            Date")
         print(f"---------------------------------------------------------------------------------------------------")
 
         # Open the file to read the revenues data
-        f = open("Revenues.dat")
+        f = open("Python/Revenues.dat")
 
         # Print the revenue records that satisfy the conditions
         for revenue in f:
@@ -405,25 +403,25 @@ class JosephFunctions:
                 # Print each revenue transaction
                 # Transaction ID, Transaction Date, Description, Subtotal, HST, Total
 
-                print(f"  {transactId:<5s}        {sf.FormatValues.FormatDateShort(transactDate):<10s}   {transactDesc:<30s}  {sf.FormatValues.FormatDollar2(subTot):>9s}      {sf.FormatValues.FormatDollar2(hst):>7s}      {sf.FormatValues.FormatDollar2(tot):>10s}")
+                print(f"  {transactId:<5s}        {fv.FormatDateShort(transactDate):<10s}   {transactDesc:<30s}  {fv.FormatDollar2(subTot):>9s}      {fv.FormatDollar2(hst):>7s}      {fv.FormatDollar2(tot):>10s}")
 
         # Close the file
         f.close()
 
         print(f"---------------------------------------------------------------------------------------------------")
-        print(f"                                                          {sf.FormatValues.FormatDollar2(revenuesSubTot):>11s}   {sf.FormatValues.FormatDollar2(revenuesHst):>10s}   {sf.FormatValues.FormatDollar2(revenuesTot):>13s}")
+        print(f"                                                          {fv.FormatDollar2(revenuesSubTot):>11s}   {fv.FormatDollar2(revenuesHst):>10s}   {fv.FormatDollar2(revenuesTot):>13s}")
         print(f"Number of transactions: {revenuesCtr:>3d}")
         print()
         print()
         print(f"Expenses")
-        print(f"Listing from {sf.FormatValues.FormatDateShort(startDate):<10s} to {sf.FormatValues.FormatDateShort(endDate):<10s}")
+        print(f"Listing from {fv.FormatDateShort(startDate):<10s} to {fv.FormatDateShort(endDate):<10s}")
         print()
         print(f"Expense   Invoice   Item              Item                Item        Qty     HST         Total")
         print(f"  ID      Number    Number         Description            Cost                            Cost")
         print(f"---------------------------------------------------------------------------------------------------")
 
         # Open the file to read the expenses data
-        f = open("Expenses.dat")
+        f = open("Python/Expenses.dat")
 
         # Print the revenue records that satisfy the conditions
         for expense in f:
@@ -454,13 +452,13 @@ class JosephFunctions:
                 # Print each expense transaction
                 # Expense ID, Invoice Number, Item Number, Item Description, Item Cost, Quantity, HST, Total Cost
 
-                print(f" {expenseId:<5s}    {invNum:<6s}    {itemNum:<7s}   {itemDesc:<22s}   {sf.FormatValues.FormatDollar2(itemCost):>10s}     {itemQty:>3d}  {sf.FormatValues.FormatDollar2(itemHst):>9s}    {sf.FormatValues.FormatDollar2(itemTot):>10s} ")
+                print(f" {expenseId:<5s}    {invNum:<6s}    {itemNum:<7s}   {itemDesc:<22s}   {fv.FormatDollar2(itemCost):>10s}     {itemQty:>3d}  {fv.FormatDollar2(itemHst):>9s}    {fv.FormatDollar2(itemTot):>10s} ")
 
         # Close the file
         f.close()
         
         print(f"---------------------------------------------------------------------------------------------------")
-        print(f"                                                    {sf.FormatValues.FormatDollar2(expensesSubTot):>13s}     {sf.FormatValues.FormatDollar2(expensesHst):>11s}    {sf.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print(f"                                                    {fv.FormatDollar2(expensesSubTot):>13s}     {fv.FormatDollar2(expensesHst):>11s}    {fv.FormatDollar2(expensesTot):>13s}")
         print(f"                                                      (Subtotal)         (HST)          (Total)")
         print(f"Number of transactions: {expensesCtr:>3d}")
         print()
@@ -469,30 +467,32 @@ class JosephFunctions:
         print(f"-------------")
         print()
         print(f"Revenues")
-        print(f"     Subtotal:        {sf.FormatValues.FormatDollar2(revenuesSubTot):>11s}")
-        print(f"     HST:              {sf.FormatValues.FormatDollar2(revenuesHst):>10s}")
+        print(f"     Subtotal:        {fv.FormatDollar2(revenuesSubTot):>11s}")
+        print(f"     HST:              {fv.FormatDollar2(revenuesHst):>10s}")
         print(f"                    -------------")
-        print(f"     Total:         {sf.FormatValues.FormatDollar2(revenuesTot):>13s}")
+        print(f"     Total:         {fv.FormatDollar2(revenuesTot):>13s}")
         print()
         print()
         print(f"Expenses")
-        print(f"     Subtotal:        {sf.FormatValues.FormatDollar2(expensesSubTot):>11s}")
-        print(f"     HST:              {sf.FormatValues.FormatDollar2(expensesHst):>10s}")
+        print(f"     Subtotal:        {fv.FormatDollar2(expensesSubTot):>11s}")
+        print(f"     HST:              {fv.FormatDollar2(expensesHst):>10s}")
         print(f"                    -------------")
-        print(f"     Total:         {sf.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print(f"     Total:         {fv.FormatDollar2(expensesTot):>13s}")
         print()
         print()
-        print(f"Revenues Total:     {sf.FormatValues.FormatDollar2(revenuesTot):>13s}")
-        print(f"Expenses Total:    -{sf.FormatValues.FormatDollar2(expensesTot):>13s}")
+        print(f"Revenues Total:     {fv.FormatDollar2(revenuesTot):>13s}")
+        print(f"Expenses Total:    -{fv.FormatDollar2(expensesTot):>13s}")
         print(f"                    -------------")
 
         # Calculate the profit margin
         profitMargin = revenuesTot - expensesTot
 
-        print(f"Profit Margin:      {sf.FormatValues.FormatDollar2(profitMargin):>13s}")
+        print(f"Profit Margin:      {fv.FormatDollar2(profitMargin):>13s}")
         print()
         print()
         input("Press Enter to Return to the Main Menu...")
+        BackToMenu()
+        return
 
 
 class MichaelFunctions:
