@@ -101,6 +101,7 @@ class JoeyFunctions:
             else:
                 #This else should search based on the driver's number entered later to check if they've already paid this fee for the month.
                 #Due to us only having to code one option, I'm hoping he will be okay with something like this.    
+                #**This is where the Balance Due would be updated.**
                 #if driverBalance += MON_STAND_FEE
                 renCos = MON_STAND_FEE
                 renCosHST = renCos * HST_RATE
