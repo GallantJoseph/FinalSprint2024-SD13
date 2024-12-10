@@ -184,16 +184,14 @@ async function RightNavDsp() {
   let dspString = "";
 
   while (true) {
+    typeWord = "RUN";
+
     // Build the RUN string for display
-    runStr += "R";
-    await sleep(250);
-    document.getElementById("runcommand").innerHTML = runStr;
-    runStr += "U";
-    await sleep(250);
-    document.getElementById("runcommand").innerHTML = runStr;
-    runStr += "N";
-    await sleep(250);
-    document.getElementById("runcommand").innerHTML = runStr;
+    for (let i = 0; i < typeWord.length; i++) {
+      runStr += typeWord[i];
+      await sleep(250);
+      document.getElementById("runcommand").innerHTML = runStr;
+    }
 
     for (let i = 0; i < 40; i++) {
       dspString += ".";
@@ -223,15 +221,15 @@ async function RightNavDsp() {
 
 // Ready cursor blinking code
 window.onload = setInterval(ReadyCursor, 500);
-let readyCursorCtr = true;
+let readyCursorStat = true;
 
-async function ReadyCursor() {
-  if (readyCursorCtr) {
+function ReadyCursor() {
+  if (readyCursorStat) {
     document.getElementById("readycursor").innerHTML = "&#9632;";
   } else {
     document.getElementById("readycursor").innerHTML = "&#9633;";
   }
-  readyCursorCtr = !readyCursorCtr;
+  readyCursorStat = !readyCursorStat;
 }
 
 function TitleCase(str) {
