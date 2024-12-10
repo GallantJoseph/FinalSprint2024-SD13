@@ -423,7 +423,7 @@ class JosephFunctions:
         print(f"---------------------------------------------------------------------------------------------------")
 
         # Open the file to read the expenses data
-        f = open("Expenses.dat")
+        f = open("Python/Expenses.dat")
 
         # Print the revenue records that satisfy the conditions
         for expense in f:
