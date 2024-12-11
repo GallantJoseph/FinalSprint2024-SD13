@@ -226,7 +226,7 @@ class JoeyFunctions:
             con = input("\nPress 'Enter' to Save Transaction Data: ")
 
             #Saving input and calculated values to revenue record.
-            f = open("Python/revenue.dat", "a")
+            f = open("Python/Revenues.dat", "a")
 
             f.writelines(f"{str(NEXT_TRANS_NUM)}, ")
             f.writelines(f"{str(NEXT_DRIVE_NUM)}, ")
@@ -258,7 +258,7 @@ class JoeyFunctions:
             #Update constants and rewrite them to defaults.
             NEXT_TRANS_NUM += 1
 
-            f = open("Python/defaults.dat", "w")
+            f = open("Python/Defaults.dat", "w")
             
             f.writelines(f"{str(NEXT_TRANS_NUM)}\n")
             f.writelines(f"{str(NEXT_DRIVE_NUM)}\n")
@@ -286,7 +286,7 @@ class JosephFunctions:
         '''
         Desc.: Print a company profit listing, including revenues and expenses, and profit margin.
         Author: Joseph Gallant
-        Dates: Dec. 5, 2024 - 
+        Dates: Dec. 5, 2024 - Dec. 11, 2024
         '''
 
         # Initialize counters and accumulators
@@ -300,13 +300,13 @@ class JosephFunctions:
         expensesHst = 0.0
         expensesTot = 0.0
 
-        # Initialize the variables (TODO: From defaults file?)
-        strAddr = "123 Main Street"
-        city = "St. John's"
-        prov = "NL"
-        postalCode = "A2C4E6"
-        phone = "7095554227" # HABS
-        email = "service@habtaxi.com"
+        # Initialize the variables
+        STR_ADDR = "123 Main Street"
+        CITY = "St. John's"
+        PROV = "NL"
+        POSTAL_CODE = "A2C4E6"
+        PHONE = "7095554227" # HABS
+        EMAIL = "service@habtaxi.com"
 
         # Print the program headings
         print()
@@ -350,12 +350,12 @@ class JosephFunctions:
         # Print the report headings
         print()
         print(f"HAB Taxi Services")
-        print(f"     {strAddr:<30s}")
-        print(f"     {city}, {prov:<2s}")
-        print(f"     {fv.FormatPostalCode(postalCode):<7s}")
+        print(f"     {STR_ADDR:<30s}")
+        print(f"     {CITY}, {PROV:<2s}")
+        print(f"     {fv.FormatPostalCode(POSTAL_CODE):<7s}")
         print()
-        print(f"     Phone: {fv.FormatPhone(phone):<14s}")
-        print(f"     Email: {email:<23s}")
+        print(f"     Phone: {fv.FormatPhone(PHONE):<14s}")
+        print(f"     Email: {EMAIL:<23s}")
         print()
 
         # Print the financial report
@@ -364,10 +364,11 @@ class JosephFunctions:
         print(f"----------------")
         print()
         print(f"Revenues")
+        print()
         print(f"Listing from {fv.FormatDateShort(startDate):<10s} to {fv.FormatDateShort(endDate):<10s}")
         print()
-        print(f"Transaction    Transaction           Description            Subtotal         HST           Total")
-        print(f"    ID            Date")
+        print(f" Transaction   Transaction            Description            Subtotal        HST          Total")
+        print(f"     ID           Date")
         print(f"---------------------------------------------------------------------------------------------------")
 
         # Open the file to read the revenues data
@@ -375,27 +376,27 @@ class JosephFunctions:
 
         # Print the revenue records that satisfy the conditions
         for revenue in f:
-            # Trans.ID, Trans. Date, Desc., SubTotal, HST, Total
+            # Transaction ID, Driver Number (not used), Transaction Date, Description, Subtotal, HST, Total
             revenueRecord = revenue.split(",")
 
             transactId = revenueRecord[0]
-            transactDate = dt.datetime.strptime(revenueRecord[1].strip(), "%Y-%m-%d")
-            transactDesc = revenueRecord[2].strip()
-            subTot = float(revenueRecord[3].strip())
-            hst = float(revenueRecord[4].strip())
-            tot = float(revenueRecord[5].strip())
+            transactDate = dt.datetime.strptime(revenueRecord[2].strip(), "%Y-%m-%d")
+            transactDesc = revenueRecord[3].strip()
+            revSubTot = float(revenueRecord[4].strip())
+            revHst = float(revenueRecord[5].strip())
+            revTot = float(revenueRecord[6].strip())
 
             # Check if the date is within the range, and if so, print the transaction and increment the counters and accumulators
             if transactDate >= startDate and transactDate <= endDate:
                 revenuesCtr += 1
 
-                revenuesSubTot += subTot
-                revenuesHst += hst
-                revenuesTot += tot
+                revenuesSubTot += revSubTot
+                revenuesHst += revHst
+                revenuesTot += revTot
                 # Print each revenue transaction
-                # Transaction ID, Transaction Date, Description, Subtotal, HST, Total
+                # Transaction ID, Driver Number (not used), Transaction Date, Description, Subtotal, HST, Total
 
-                print(f"  {transactId:<5s}        {fv.FormatDateShort(transactDate):<10s}   {transactDesc:<30s}  {fv.FormatDollar2(subTot):>9s}      {fv.FormatDollar2(hst):>7s}      {fv.FormatDollar2(tot):>10s}")
+                print(f"    {transactId:<5s}      {fv.FormatDateShort(transactDate):<10s}     {transactDesc:<28s}  {fv.FormatDollar2(revSubTot):>9s}      {fv.FormatDollar2(revHst):>7s}      {fv.FormatDollar2(revTot):>10s}")
 
         # Close the file
         f.close()
@@ -406,35 +407,32 @@ class JosephFunctions:
         print()
         print()
         print(f"Expenses")
+        print()
         print(f"Listing from {fv.FormatDateShort(startDate):<10s} to {fv.FormatDateShort(endDate):<10s}")
         print()
-        print(f"Expense   Invoice   Item              Item                Item        Qty     HST         Total")
-        print(f"  ID      Number    Number         Description            Cost                            Cost")
+        print(f" Invoice  Invoice    Driver   Item        Description        Subtotal        HST          Total")
+        print(f" Number    Date      Number  Number                                                       Cost")
         print(f"---------------------------------------------------------------------------------------------------")
 
         # Open the file to read the expenses data
         f = open("Python/Expenses.dat")
 
-        # Print the revenue records that satisfy the conditions
+        # Print the expense records that satisfy the conditions
         for expense in f:
-            # Expense ID, Invoice Number, Item Number, Item Description, Item Cost, Quantity, HST, Total Cost
+            # Invoice Number, Invoice Date, Driver Number, Item Number, Item Description, Item Cost (not used), Item Quantity (not used), Subtotal, HST, Total
             expenseRecord = expense.split(",")
 
-            expenseId = expenseRecord[0].strip()
-            invNum = expenseRecord[1].strip()
-            itemNum = expenseRecord[2].strip()
-            itemDesc = expenseRecord[3].strip()
-            itemCost = float(expenseRecord[4].strip())
-            itemQty = int(expenseRecord[5].strip())
-            itemSubTot = itemQty * itemCost # TODO, add this value to the file instead
-            itemHst = float(expenseRecord[6].strip())
-            itemTot = float(expenseRecord[7].strip())
-
-            # TODO: Add a field/variable in the file, find a way to display it somewhere
-            expenseDate = dt.datetime.strptime("2024-10-10", "%Y-%m-%d")
+            invNum = expenseRecord[0].strip()
+            invDate = dt.datetime.strptime(expenseRecord[1].strip(), "%Y-%m-%d")
+            driverNum = expenseRecord[2].strip()
+            itemNum = expenseRecord[3].strip()
+            itemDesc = expenseRecord[4].strip()
+            itemSubTot = float(expenseRecord[7].strip())
+            itemHst = float(expenseRecord[8].strip())
+            itemTot = float(expenseRecord[9].strip())
 
             # Check if the date is within the range, and if so, print the transaction and increment the counters and accumulators
-            if expenseDate >= startDate and expenseDate <= endDate:
+            if invDate >= startDate and invDate <= endDate:
                 expensesCtr+=1
 
                 expensesSubTot += itemSubTot
@@ -442,16 +440,16 @@ class JosephFunctions:
                 expensesTot += itemTot
 
                 # Print each expense transaction
-                # Expense ID, Invoice Number, Item Number, Item Description, Item Cost, Quantity, HST, Total Cost
+                # Invoice Number, Invoice Date, Driver Number, Item Number, Item Description, Subtotal, HST, Total
 
-                print(f" {expenseId:<5s}    {invNum:<6s}    {itemNum:<7s}   {itemDesc:<22s}   {fv.FormatDollar2(itemCost):>10s}     {itemQty:>3d}  {fv.FormatDollar2(itemHst):>9s}    {fv.FormatDollar2(itemTot):>10s} ")
+                print(f" {invNum:<6s}  {fv.FormatDateShort(invDate):<10s}   {driverNum:<4s}   {itemNum:<7s}  {itemDesc:<20s}  {fv.FormatDollar2(itemSubTot):>10s}    {fv.FormatDollar2(itemHst):>9s}     {fv.FormatDollar2(itemTot):>10s} ")
 
         # Close the file
         f.close()
         
         print(f"---------------------------------------------------------------------------------------------------")
-        print(f"                                                    {fv.FormatDollar2(expensesSubTot):>13s}     {fv.FormatDollar2(expensesHst):>11s}    {fv.FormatDollar2(expensesTot):>13s}")
-        print(f"                                                      (Subtotal)         (HST)          (Total)")
+        print(f"                                                         {fv.FormatDollar2(expensesSubTot):>13s}  {fv.FormatDollar2(expensesHst):>11s}  {fv.FormatDollar2(expensesTot):>13s}")
+        print()
         print(f"Number of transactions: {expensesCtr:>3d}")
         print()
         print()
