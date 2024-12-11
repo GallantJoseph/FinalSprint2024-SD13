@@ -68,18 +68,18 @@ nav {
 
 .navleft a:hover {
   text-decoration: none;
-  color: rgb(16, 16, 16);
+  color: white;
   transform: scale(115%);
 }
 
 .navleft a:link {
   text-decoration: none;
-  color: rgb(16, 16, 16);
+  color: white;
 }
 
 .navleft a:visited {
   text-decoration: none;
-  color: rgb(16, 16, 16);
+  color: white;
 }
 
 .navright {
