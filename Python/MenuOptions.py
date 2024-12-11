@@ -7,7 +7,7 @@ Note : The amount of J-names are very confusing o_o -Ashton
 
 # Functions used across all classes
 from time import sleep
-from SharedFunctions import BackToMenu, FormatValues as fv, ProgressBar
+from SharedFunctions import BackToMenu, FormatValues as fv, ProgressBar, clear
 import datetime as dt
 import sys
 
@@ -22,7 +22,24 @@ class AshFunctions:
         return
 
     def end():
-        exit(0) # temp until i make something funny
+        totalIttr = 75
+        for i in range(74):
+            ProgressBar(i, totalIttr, prefix="Exiting", suffix="Complete", length=50)
+            sleep(0.1)
+        sleep(2)
+        clear()
+        for j in range(73, 30, -1):
+            ProgressBar(j, totalIttr, prefix="Exiting", suffix="Take it back now y'all", length=50)
+            sleep(0.3)
+        sleep(1.5)
+        clear()
+        ProgressBar(74, totalIttr, prefix="Exiting", suffix="One hop this time", length=50)
+        sleep(3)
+        clear()
+        ProgressBar(75, totalIttr, prefix="Exiting", suffix="Complete", length=50)
+        sleep(1)
+        print("\nThank you for using our program!")
+        exit(0)
 
 class JoeyFunctions:
     def CompanyRevenue():

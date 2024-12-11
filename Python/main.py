@@ -65,6 +65,7 @@ while True:
             clear()
             AshFunctions.placeholder()
         case "8":
+            clear()
             AshFunctions.end()
         case _:
             clear()
