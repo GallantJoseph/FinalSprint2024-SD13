@@ -239,7 +239,7 @@ class JoeyFunctions:
             else:
                 f.writelines(f"Owned, ")
             f.writelines(f"{renType}, ")
-            f.writelines(f"{str(renCos)}")
+            f.writelines(f"{str(renCos)}, ")
             f.writelines(f"{str(renCosHST)}, ")
             f.writelines(f"{str(renTotal)}\n")
 
@@ -257,7 +257,6 @@ class JoeyFunctions:
         
             #Update constants and rewrite them to defaults.
             NEXT_TRANS_NUM += 1
-            NEXT_DRIVE_NUM += 1
 
             f = open("Python/defaults.dat", "w")
             
