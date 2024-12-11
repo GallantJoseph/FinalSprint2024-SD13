@@ -7,7 +7,7 @@ Note : The amount of J-names are very confusing o_o -Ashton
 
 # Functions used across all classes
 from time import sleep
-from SharedFunctions import BackToMenu, FormatValues as fv
+from SharedFunctions import BackToMenu, FormatValues as fv, ProgressBar
 import datetime as dt
 import sys
 
@@ -48,16 +48,6 @@ class JoeyFunctions:
         f.close()
 
         VAL_NUM = set("1234")
-
-        #Function(s)!
-        def ProBar(iteration, total, prefix='', suffix='', length=30, fill='█'):
-            #This function generates and displays a progress bar with % complete at the end.
-            percent = ("{0:.1f}").format(100 * (iteration / float(total)))
-            filled_length = int(length * iteration // total)
-            bar = fill * filled_length + '-' * (length - filled_length)
-            sys.stdout.write(f'\r{prefix} |{bar}| {percent}% {suffix}')
-            sys.stdout.flush()
-            
 
         #Program start.
         while True:
@@ -101,6 +91,7 @@ class JoeyFunctions:
             else:
                 #This else should search based on the driver's number entered later to check if they've already paid this fee for the month.
                 #Due to us only having to code one option, I'm hoping he will be okay with something like this.    
+                #**This is where the Balance Due would be updated.**
                 #if driverBalance += MON_STAND_FEE
                 renCos = MON_STAND_FEE
                 renCosHST = renCos * HST_RATE
@@ -248,6 +239,8 @@ class JoeyFunctions:
             else:
                 f.writelines(f"Owned, ")
             f.writelines(f"{renType}, ")
+            f.writelines(f"{str(renCos)}, ")
+            f.writelines(f"{str(renCosHST)}, ")
             f.writelines(f"{str(renTotal)}\n")
 
             f.close()
@@ -259,12 +252,11 @@ class JoeyFunctions:
         
             for i in range(TotalIterations + 1):
                 sleep(0.1)
-                ProBar(i, TotalIterations, prefix=Message, suffix='Complete', length=50)
+                ProgressBar(i, TotalIterations, prefix=Message, suffix='Complete', length=50)
             print()
         
             #Update constants and rewrite them to defaults.
             NEXT_TRANS_NUM += 1
-            NEXT_DRIVE_NUM += 1
 
             f = open("Python/defaults.dat", "w")
             
