@@ -239,6 +239,7 @@ class JoeyFunctions:
             else:
                 f.writelines(f"Owned, ")
             f.writelines(f"{renType}, ")
+            f.writelines(f"str{renCosHST}, ")
             f.writelines(f"{str(renTotal)}\n")
 
             f.close()
