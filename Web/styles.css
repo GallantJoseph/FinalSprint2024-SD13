@@ -133,12 +133,41 @@ main {
   float: left;
 }
 footer {
+  color: white;
   width: 1000px;
   height: 80px;
   background-color: black;
-  border-top: 3px solid gray;
+  border-top: 3px solid silver;
+}
+footer h1 {
+  padding-left: 10px;
+  padding-top: 25px;
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+.footerleftbox {
+  padding-left: 20px;
+  float: left;
+}
+
+.footerrightbox {
+  padding-right: 20px;
+  float: right;
+}
+
+.footerrightbox img {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.copyright {
+  text-align: right;
+}
+footer img:hover {
+  transform: scale(125%);
+}
 .monospace {
   font-family: "Courier New", Courier, monospace;
 }
