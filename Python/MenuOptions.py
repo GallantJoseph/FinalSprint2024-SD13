@@ -49,7 +49,7 @@ class JoeyFunctions:
         #(rental info has to be input here too :P)
 
         #Constants.
-        f = open("Python/defaults.dat", "r")
+        f = open("Python/Defaults.dat", "r")
 
         lineList = []
         for line in f:
