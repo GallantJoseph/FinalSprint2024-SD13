@@ -249,13 +249,6 @@ class JoeyFunctions:
             f.writelines(f"{str(NEXT_DRIVE_NUM)}, ")
             f.writelines(f"{str(fv.FormatDateShort(tranDate))}, ")
             f.writelines(f"{tranDesc}, ")
-            if carStat == "R":
-                f.writelines(f"{str(carNum)}, ")
-                f.writelines(f"{str(fv.FormatDateShort(renStartDate))}, ")
-                f.writelines(f"{str(fv.FormatDateShort(renEndDate))}, ")
-            else:
-                f.writelines(f"Owned, ")
-            f.writelines(f"{renType}, ")
             f.writelines(f"{str(renCos)}, ")
             f.writelines(f"{str(renCosHST)}, ")
             f.writelines(f"{str(renTotal)}\n")
