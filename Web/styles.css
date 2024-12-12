@@ -9,10 +9,11 @@ body {
 }
 
 .mainbox {
-  width: 1006px;
+  width: 1016px;
   /* height: 600px; will be removed later */
   background-color: lightgrey;
-  border: 3px solid silver;
+  border: 8px solid silver;
+
   border-radius: 5px;
   margin: auto;
   margin-top: 20px;
@@ -30,19 +31,19 @@ header {
 /* The header is made up of a message bar and the banner image. */
 .tophead {
   width: 1000px;
-  height: 45px;
+  height: 50px;
   background-color: lightgrey;
-  border-bottom: 3px solid silver;
+  border-bottom: 8px solid silver;
 }
 
 /* The navigation section. */
 
 nav {
   width: 1000px;
-  height: 50px;
+  height: 67px;
   background-color: silver;
-  border-top: 3px solid silver;
-  border-bottom: 3px solid silver;
+  border-top: 12px solid silver;
+  border-bottom: 8px solid silver;
 }
 
 /* The nav section will contain 2 divs. */
@@ -104,32 +105,32 @@ main {
 /* The main section will contain 3 divs. */
 
 .maintopleft {
-  width: 490px;
+  width: 495px;
   height: 360px;
   background-color: lightgray;
   border: 1px solid black;
   padding: 10px;
-  margin: 5px;
+  margin: 0px;
   float: left;
 }
 
 .mainright {
-  width: 490px;
-  height: 670px;
+  width: 495px;
+  height: 675px;
   background-color: lightgray;
   border: 1px solid black;
   padding: 10px;
-  margin: 5px;
+  margin-left: 5px;
   float: right;
 }
 
 .mainbottomleft {
-  width: 490px;
-  height: 300px;
+  width: 495px;
+  height: 305px;
   background-color: lightgrey;
   border: 1px solid black;
   padding: 10px;
-  margin: 5px;
+  margin-top: 10px;
   float: left;
 }
 footer {
@@ -137,7 +138,6 @@ footer {
   width: 1000px;
   height: 80px;
   background-color: black;
-  border-top: 3px solid silver;
 }
 footer h1 {
   padding-left: 10px;
