@@ -2,10 +2,6 @@
 
 import datetime 
 
-# constants
-
-REVENUES_FILE = "Revenues.dat"
-
 # option 7: print driver financial listing
 
 print("\nDRIVER FINANCIAL LISTING\n")
