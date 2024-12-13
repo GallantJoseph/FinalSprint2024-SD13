@@ -49,7 +49,7 @@ class JoeyFunctions:
 
         #Constants. 
         NEXT_TRANS_NUM = int(lineList[0].strip())
-        MAX_DRIVE_NUM = int(lineList[1].strip())
+        MAX_DRIVE_NUM = int(lineList[1].strip()) - 1
         MON_STAND_FEE = float(lineList[2].strip()) 
         DAY_REN_FEE = float(lineList[3].strip())
         WEE_REN_FEE = float(lineList[4].strip())
