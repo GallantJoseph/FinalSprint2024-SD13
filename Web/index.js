@@ -366,3 +366,9 @@ function TellMeAStory() {
 
 	document.getElementById("story").innerHTML = story;
 }
+
+// displays the current year
+
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("year").textContent = new Date().getFullYear();
+});
