@@ -18,7 +18,7 @@ while True:
     print("4. Track Car Rentals.")
     print("5. Record Employee Payment.")
     print("6. Print Company Profit Listing. [Implemented]")
-    print("7. Print Driver Financial Listing.")
+    print("7. Print Driver Financial Listing. [Implemented]")
     print("8. Quit Program.")
     print()
     match input("      Enter choice (1-8): "):
