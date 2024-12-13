@@ -56,11 +56,18 @@ class JoeyFunctions:
             lineList.append(line)
         
         NEXT_TRANS_NUM = int(lineList[0].strip())
-        NEXT_DRIVE_NUM = int(lineList[1].strip())
+        MAX_DRIVE_NUM = int(lineList[1].strip())
         MON_STAND_FEE = float(lineList[2].strip()) 
         DAY_REN_FEE = float(lineList[3].strip())
         WEE_REN_FEE = float(lineList[4].strip())
         HST_RATE = float(lineList[5].strip())
+
+        f.close()
+
+        f = open("Python/DataFiles/Employees.dat", "r")
+
+        listerMister = f.readlines(1)
+        MIN_DRIVE_NUM = int(listerMister[0][0:4].strip())
 
         f.close()
 
@@ -83,6 +90,20 @@ class JoeyFunctions:
                     print("\n   Input Error: Transaction description cannot be empty.\n")
                 else:
                     break
+
+            while True:
+                try:
+                    driveNum = int(input("Enter Your Driver Number: "))
+                except:
+                    print("\n   Input Error: Driver number cannot be an invalid value.\n")
+                else:
+                    if (driveNum > MAX_DRIVE_NUM) or (driveNum < MIN_DRIVE_NUM):
+                        print(f"\n   Input Error: This driver number does not exist.\n                It cannot be less than {MIN_DRIVE_NUM} or exceed {MAX_DRIVE_NUM}.\n")
+                    elif len(str(driveNum)) != 4:
+                        print("\n   Input Error: Driver number must be 4 digits in length.\n")
+                    else:
+                        break
+                    
 
             print("\n---Rental Information---\n")
 
@@ -227,7 +248,7 @@ class JoeyFunctions:
 
             print(f"Rental Information:")
             print(f"----------------------------------")
-            print(f"Driver Number:                {NEXT_DRIVE_NUM:>4d}")
+            print(f"Driver Number:                {driveNum:>4d}")
             if carStat == "R":
                 print(f"Car Number:             {carNum:>10s}")
                 print(f"Rental Start Date:      {fv.FormatDateShort(renStartDate):>10s}")
@@ -246,12 +267,12 @@ class JoeyFunctions:
             f = open("Python/DataFiles/Revenues.dat", "a")
 
             f.writelines(f"{str(NEXT_TRANS_NUM)}, ")
-            f.writelines(f"{str(NEXT_DRIVE_NUM)}, ")
+            f.writelines(f"{str(driveNum)}, ")
             f.writelines(f"{str(fv.FormatDateShort(tranDate))}, ")
             f.writelines(f"{tranDesc}, ")
-            f.writelines(f"{str(renCos)}, ")
-            f.writelines(f"{str(renCosHST)}, ")
-            f.writelines(f"{str(renTotal)}\n")
+            f.writelines(f"{str(round(renCos, 2))}, ")
+            f.writelines(f"{str(round(renCosHST, 2))}, ")
+            f.writelines(f"{str(round(renTotal, 2))}\n")
 
             f.close()
 
@@ -271,7 +292,7 @@ class JoeyFunctions:
             f = open("Python/DataFiles/Defaults.dat", "w")
             
             f.writelines(f"{str(NEXT_TRANS_NUM)}\n")
-            f.writelines(f"{str(NEXT_DRIVE_NUM)}\n")
+            f.writelines(f"{str(MAX_DRIVE_NUM)}\n")
             f.writelines(f"{str(MON_STAND_FEE)}\n")
             f.writelines(f"{str(DAY_REN_FEE)}\n")
             f.writelines(f"{str(WEE_REN_FEE)}\n")
