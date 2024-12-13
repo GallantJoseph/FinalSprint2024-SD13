@@ -63,7 +63,7 @@ while True:
             print("Opening...")
             sleep(1.5)
             clear()
-            AshFunctions.placeholder()
+            JakeFunctions.FinancialListing()
         case "8":
             clear()
             AshFunctions.end()
