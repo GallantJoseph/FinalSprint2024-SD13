@@ -327,6 +327,10 @@ class JakeFunctions:
         except:
             print("ERROR - failed to read revenues file.")
 
+        input("Press Enter to Return to the Main Menu...")
+        BackToMenu()
+        return
+
 class JosephFunctions:
     def CompanyProfitListing():
         '''
