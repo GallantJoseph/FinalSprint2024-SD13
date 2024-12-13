@@ -236,3 +236,17 @@ button:hover {
   background-color: rgb(84, 84, 84);
   transform: translateY(-2px); /* Slight lift effect */
 }
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 5rem;
+}
+
+.heading {
+  color: black;
+  font-size: 2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+}
