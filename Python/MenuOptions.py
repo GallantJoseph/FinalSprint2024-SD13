@@ -49,7 +49,7 @@ class JoeyFunctions:
         #(rental info has to be input here too :P)
 
         #Constants.
-        f = open("Python/Defaults.dat", "r")
+        f = open("Python/DataFiles/Defaults.dat", "r")
 
         lineList = []
         for line in f:
@@ -243,7 +243,7 @@ class JoeyFunctions:
             con = input("\nPress 'Enter' to Save Transaction Data: ")
 
             #Saving input and calculated values to revenue record.
-            f = open("Python/Revenues.dat", "a")
+            f = open("Python/DataFiles/Revenues.dat", "a")
 
             f.writelines(f"{str(NEXT_TRANS_NUM)}, ")
             f.writelines(f"{str(NEXT_DRIVE_NUM)}, ")
@@ -268,7 +268,7 @@ class JoeyFunctions:
             #Update constants and rewrite them to defaults.
             NEXT_TRANS_NUM += 1
 
-            f = open("Python/Defaults.dat", "w")
+            f = open("Python/DataFiles/Defaults.dat", "w")
             
             f.writelines(f"{str(NEXT_TRANS_NUM)}\n")
             f.writelines(f"{str(NEXT_DRIVE_NUM)}\n")
@@ -304,7 +304,7 @@ class JakeFunctions:
         
 
         try:
-            RevenuesFile = open("Python/Revenues.dat", "r")
+            RevenuesFile = open("Python/DataFiles/Revenues.dat", "r")
             print(f"\nFinancial listing for driver {DriverNumber} ({StartDateF} to {EndDateF}):")
             TransactionAmount = 0.0
             TotalHst = 0.0
@@ -422,7 +422,7 @@ class JosephFunctions:
         print(f"---------------------------------------------------------------------------------------------------")
 
         # Open the file to read the revenues data
-        f = open("Python/Revenues.dat")
+        f = open("Python/DataFiles/Revenues.dat")
 
         # Print the revenue records that satisfy the conditions
         for revenue in f:
@@ -465,7 +465,7 @@ class JosephFunctions:
         print(f"---------------------------------------------------------------------------------------------------")
 
         # Open the file to read the expenses data
-        f = open("Python/Expenses.dat")
+        f = open("Python/DataFiles/Expenses.dat")
 
         # Print the expense records that satisfy the conditions
         for expense in f:
