@@ -8,6 +8,16 @@ from MenuOptions import *
 from time import sleep
 
 while True:
+    # Reads the values of the Defaults file every time the loop repeats
+    f = open("Python/DataFiles/Defaults.dat", "r")
+
+    defaults = []
+    for line in f:
+        defaults.append(line)
+
+    f.close()
+
+    # The Main Menu
     clear()
     print("        HAB Taxi Services")
     print("     Company Services System")
@@ -33,7 +43,7 @@ while True:
             print("Opening...")
             sleep(1.5)
             clear()
-            JoeyFunctions.CompanyRevenue()
+            JoeyFunctions.CompanyRevenue(defaults)
         case "3":
             clear()
             print("Opening...")

@@ -7,9 +7,8 @@ Note : The amount of J-names are very confusing o_o -Ashton
 
 # Functions used across all classes
 from time import sleep
-from SharedFunctions import BackToMenu, FormatValues as fv, ProgressBar, clear
+from SharedFunctions import FormatValues as fv, BackToMenu, ProgressBar, clear
 import datetime as dt
-import sys
 
 
 class AshFunctions:
@@ -42,27 +41,19 @@ class AshFunctions:
         exit(0)
 
 class JoeyFunctions:
-    def CompanyRevenue():
+    def CompanyRevenue(lineList: list):
         #I am Joey and I made this!!!1!11!1
         #This program will allow users to enter new 
         #revenue data information and save it to a file.
         #(rental info has to be input here too :P)
 
-        #Constants.
-        f = open("Python/DataFiles/Defaults.dat", "r")
-
-        lineList = []
-        for line in f:
-            lineList.append(line)
-        
+        #Constants. 
         NEXT_TRANS_NUM = int(lineList[0].strip())
         MAX_DRIVE_NUM = int(lineList[1].strip())
         MON_STAND_FEE = float(lineList[2].strip()) 
         DAY_REN_FEE = float(lineList[3].strip())
         WEE_REN_FEE = float(lineList[4].strip())
         HST_RATE = float(lineList[5].strip())
-
-        f.close()
 
         f = open("Python/DataFiles/Employees.dat", "r")
 
