@@ -151,6 +151,8 @@ function DspHeaderMessage() {
 }
 
 // Slideshow function and code! :D
+//Author: Joey Thomas
+//Date: Dec. 4, 2024
 let step = 0;
 let Images = new Array();
 Images[0] = "Images/TeslaBot.jpg";
