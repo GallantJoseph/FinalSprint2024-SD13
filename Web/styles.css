@@ -40,6 +40,8 @@ header {
   height: 50px;
   background-color: lightgrey;
   border-bottom: 8px solid silver;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 /* The navigation section. */
@@ -57,7 +59,7 @@ nav {
 .navleft {
   width: 495px;
   height: 44px;
-  background-color: rgb(4, 68, 152);
+  background-color: rgb(3, 3, 155);
   float: left;
   text-align: center;
   padding-top: 6px;
@@ -67,7 +69,7 @@ nav {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18pt;
   text-decoration: none;
-  margin-left: 22px;
+  margin-left: 26px;
   margin-right: 22px;
   display: block;
   float: left;
@@ -144,6 +146,7 @@ footer {
   width: 1000px;
   height: 80px;
   background-color: black;
+  padding-top: 4px;
 }
 footer h1 {
   padding-left: 10px;

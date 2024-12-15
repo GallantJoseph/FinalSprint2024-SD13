@@ -251,7 +251,7 @@ function LoanAnalysis() {
   // User Input
   let loanAmt = parseFloat(prompt("Enter Loan Amount", "5000"), 10);
   let loanReason = prompt("Enter Reason For Loan", "Robot Army");
-  let paybackOption = prompt("Enter Length Of Payment", "10");
+  let paybackOption = prompt("Enter Number Of Years For Loan", "10");
 
   // Display Variables
   let loanAmtDsp = currencyFormat.format(loanAmt);
@@ -372,5 +372,5 @@ function TellMeAStory() {
 // displays the current year
 
 document.addEventListener("DOMContentLoaded", function () {
-	document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 });

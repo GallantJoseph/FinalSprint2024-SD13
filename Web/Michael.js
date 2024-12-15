@@ -85,7 +85,7 @@ const strings = [
   "Keyin is dope.",
   "My group members smell but i love dem.",
   "Aren't you glad you don't have to deal with the spelling corrections anymore?",
-  "Its JAVASCRIPT not JAVA.",
+  "It's JAVASCRIPT not JAVA.",
   "Ashton GPT.",
   "Robots WILL take over the world someday",
   "We deserve 100%",
