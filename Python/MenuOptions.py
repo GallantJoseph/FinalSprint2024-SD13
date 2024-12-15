@@ -302,60 +302,97 @@ class JustinFunctions:
 
 class JakeFunctions:
     def FinancialListing():
-        # constants
+        # Option 7: Print Driver Financial Listing
+        
+        # Constants
         REVENUES_FILE = "Python/DataFiles/Revenues.dat"
         EMPLOYEES_FILE = "Python/DataFiles/Employees.dat"
 
-        # option 7: print driver financial listing
-
         print("\nDriver Financial Listing\n")
-        DriverNumber = input("Enter Driver/employee number: ")
+
+        # Validate the DriverNumber
+
+        while True:
+            DriverNumber = input("Enter the Driver Number: ")
+
+            if DriverNumber == "":
+                print("Data Entry Error - A Driver Number is Required.")
+            else:
+
+                # Check if the Employee Number exists in the data file
+                with open(EMPLOYEES_FILE, "r") as EmployeesFile:
+                    DriverFound = False
+                    for Line in EmployeesFile:
+                        DriverId, FirstName, LastName, Address, City, Prov, PostalCode, Phone1, Phone2, Date, Num1, Num2, EmpTotal = Line.strip().split(", ")
+                        Date = dt.datetime.strptime(Date, "%Y-%m-%d")
+                        if DriverId == DriverNumber:
+                            DriverFound = True
+                            break
+
+                    if not DriverFound:
+                        print(f"Driver {DriverNumber} not found in employees file.")
+                    else:
+                        break
+
+        # Validate the StartDate
+
         StartDate = input("Enter Start Date (YYYY-MM-DD): ")
+
+        # Validate the EndDate
+
         EndDate = input("Enter End Date (YYYY-MM-DD): ")
 
         StartDate = dt.datetime.strptime(StartDate, "%Y-%m-%d")
         EndDate = dt.datetime.strptime(EndDate, "%Y-%m-%d")
 
         try:
+            print("\n\nDriver Financial Report:")
+            print(f"     Driver Number:      {DriverNumber}")
+            print(f"     Driver Name:        {FirstName} {LastName}")
+            EmpTotal = float(EmpTotal)
+            print(f"     Current Balance:    {fv.FormatDollar2(EmpTotal):<10s}")
+
+            print(f"\n\nRevenues")
+            print()
+            print(f"Listing from {fv.FormatDateShort(StartDate):<10s} to {fv.FormatDateShort(EndDate):<10s}")
+            print()
+            print(f" Transaction   Transaction            Description            Subtotal        HST          Total")
+            print(f"     ID           Date")
+            print(f"---------------------------------------------------------------------------------------------------")
+
             with open(REVENUES_FILE, "r") as RevenuesFile:
+                TransactionCounter = 0
                 TransactionAmount = 0.0
                 TotalHst = 0.0
                 TotalAmount = 0.0
 
                 for Line in RevenuesFile:
                     try:
-                        TransactionId, DriverId, Date, Description, Amount, Hst, Total = Line.strip().split(",")
+                        TransactionId, DriverId, Date, Description, Amount, Hst, Total = Line.strip().split(", ")
+
                         Date = dt.datetime.strptime(Date, "%Y-%m-%d")
-                        if DriverId == DriverNumber and StartDate <= Date <= EndDate:
+
+                        Amount = float(Amount)
+                        Hst = float(Hst)
+                        Total = float(Total)
+                        
+                        if DriverId == DriverNumber and Date >= StartDate and Date <= EndDate:
+                            print(f"    {TransactionId:<5s}      {fv.FormatDateShort(Date):<10s}     {Description:<28s}  {fv.FormatDollar2(Amount):>9s}      {fv.FormatDollar2(Hst):>7s}      {fv.FormatDollar2(Total):>10s}")
+                            TransactionCounter += 1
                             TransactionAmount += float(Amount)
                             TotalHst += float(Hst)
                             TotalAmount += float(Total)
                     except ValueError as E:
                         print(f"Error processing line: {Line.strip()} - {E}")
 
-            with open(EMPLOYEES_FILE, "r") as EmployeesFile:
-                DriverFound = False
-                for Line in EmployeesFile:
-                    DriverId, FirstName, LastName, Address, City, Prov, PostalCode, Phone1, Phone2, Date, Num1, Num2, EmpTotal = Line.strip().split(",")
-                    Date = dt.datetime.strptime(Date, "%Y-%m-%d")
-                    if DriverId == DriverNumber:
-                        DriverFound = True
-                        break
-
-                if not DriverFound:
-                    print(f"Driver {DriverNumber} not found in employees file.")
-                else:
-                    print("\nDriver Financial Report:")
-                    print(f"     Driver Number:      {DriverNumber}")
-                    print(f"     Driver Name:        {FirstName} {LastName}")
-                    EmpTotal = float(EmpTotal)
-                    print(f"     Current Balance:    ${EmpTotal:,.2f}")
-                    print()
-
         except FileNotFoundError as E:
             print(f"Error: {E}")
         except Exception as E:
             print(f"An unexpected error occurred: {E}")
+
+        print(f"---------------------------------------------------------------------------------------------------")
+        print(f"                                                          {fv.FormatDollar2(TransactionAmount):>11s}   {fv.FormatDollar2(TotalHst):>10s}   {fv.FormatDollar2(TotalAmount):>13s}")
+        print(f"Number of transactions: {TransactionCounter:>3d}")
 
         input("Press Enter to Return to the Main Menu...")
         BackToMenu()
