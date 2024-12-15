@@ -302,42 +302,60 @@ class JustinFunctions:
 
 class JakeFunctions:
     def FinancialListing():
+        # constants
+        REVENUES_FILE = "Python/DataFiles/Revenues.dat"
+        EMPLOYEES_FILE = "Python/DataFiles/Employees.dat"
+
         # option 7: print driver financial listing
 
-        print("\nDRIVER FINANCIAL LISTING\n")
-        DriverNumber = input("Enter driver/employee number: ")
-        StartDate = input("Enter start date (YYYY-MM-DD): ")
-        EndDate = input("Enter end date (YYYY-MM-DD): ")
+        print("\nDriver Financial Listing\n")
+        DriverNumber = input("Enter Driver/employee number: ")
+        StartDate = input("Enter Start Date (YYYY-MM-DD): ")
+        EndDate = input("Enter End Date (YYYY-MM-DD): ")
 
         StartDate = dt.datetime.strptime(StartDate, "%Y-%m-%d")
         EndDate = dt.datetime.strptime(EndDate, "%Y-%m-%d")
-        StartDateF = StartDate.strftime("%Y-%m-%d")
-        EndDateF = EndDate.strftime("%Y-%m-%d")
-        
 
         try:
-            RevenuesFile = open("Python/DataFiles/Revenues.dat", "r")
-            print(f"\nFinancial listing for driver {DriverNumber} ({StartDateF} to {EndDateF}):")
-            TransactionAmount = 0.0
-            TotalHst = 0.0
-            TotalAmount = 0.0
+            with open(REVENUES_FILE, "r") as RevenuesFile:
+                TransactionAmount = 0.0
+                TotalHst = 0.0
+                TotalAmount = 0.0
 
-            for Line in RevenuesFile:
-                TransactionId, DriverId, Date, Description, Amount, Hst, Total = Line.replace(" ", "").split(",")
-                Date = dt.datetime.strptime(Date, "%Y-%m-%d")
-                DateF = Date.strftime("%Y-%m-%d")
-                if DriverId == DriverNumber and StartDate <= Date <= EndDate:
-                    print(f"Transaction #: {TransactionId}, {DateF}, {Amount}, {Hst}, {Total}")
-                    TransactionAmount += float(Amount)
-                    TotalHst += float(Hst)
-                    TotalAmount += float(Total)
+                for Line in RevenuesFile:
+                    try:
+                        TransactionId, DriverId, Date, Description, Amount, Hst, Total = Line.strip().split(",")
+                        Date = dt.datetime.strptime(Date, "%Y-%m-%d")
+                        if DriverId == DriverNumber and StartDate <= Date <= EndDate:
+                            TransactionAmount += float(Amount)
+                            TotalHst += float(Hst)
+                            TotalAmount += float(Total)
+                    except ValueError as E:
+                        print(f"Error processing line: {Line.strip()} - {E}")
 
-            print("\nAmount Summary: \n")
-            print(f"subtotal: ${TransactionAmount:.2f}")
-            print(f"Total HST: ${TotalHst:.2f}")
-            print(f"Total amount: ${TotalAmount:.2f}")
-        except:
-            print("ERROR - failed to read revenues file.")
+            with open(EMPLOYEES_FILE, "r") as EmployeesFile:
+                DriverFound = False
+                for Line in EmployeesFile:
+                    DriverId, FirstName, LastName, Address, City, Prov, PostalCode, Phone1, Phone2, Date, Num1, Num2, EmpTotal = Line.strip().split(",")
+                    Date = dt.datetime.strptime(Date, "%Y-%m-%d")
+                    if DriverId == DriverNumber:
+                        DriverFound = True
+                        break
+
+                if not DriverFound:
+                    print(f"Driver {DriverNumber} not found in employees file.")
+                else:
+                    print("\nDriver Financial Report:")
+                    print(f"     Driver Number:      {DriverNumber}")
+                    print(f"     Driver Name:        {FirstName} {LastName}")
+                    EmpTotal = float(EmpTotal)
+                    print(f"     Current Balance:    ${EmpTotal:,.2f}")
+                    print()
+
+        except FileNotFoundError as E:
+            print(f"Error: {E}")
+        except Exception as E:
+            print(f"An unexpected error occurred: {E}")
 
         input("Press Enter to Return to the Main Menu...")
         BackToMenu()
