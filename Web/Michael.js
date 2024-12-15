@@ -1,3 +1,7 @@
+// Desc: Javascript File
+// Author: Joseph, Joey, Jake, Justin, Ashton, Mike
+// Dates: Dec 1 - 15, 2024
+
 const resolver = {
   resolve: function resolve(options, callback) {
     // The string to resolve

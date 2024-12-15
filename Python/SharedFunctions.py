@@ -1,3 +1,7 @@
+# Desc: Functions File
+# Date: Dec 1 - 15, 2024
+# Names: Joseph, Joey, Jake, Justin, Ashton, Mike
+
 import datetime
 from os import system, name
 from time import sleep

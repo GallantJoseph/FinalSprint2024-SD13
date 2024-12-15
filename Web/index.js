@@ -1,6 +1,6 @@
-// Desc:
-// Author:
-// Dates:
+// Desc: Javascript File
+// Author: Joseph, Joey, Jake, Justin, Ashton, Mike
+// Dates: Dec 1 - 15, 2024
 
 var $ = function (id) {
   return document.getElementById(id);
