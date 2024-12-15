@@ -302,44 +302,129 @@ class JustinFunctions:
 
 class JakeFunctions:
     def FinancialListing():
-        # option 7: print driver financial listing
-
-        print("\nDRIVER FINANCIAL LISTING\n")
-        DriverNumber = input("Enter driver/employee number: ")
-        StartDate = input("Enter start date (YYYY-MM-DD): ")
-        EndDate = input("Enter end date (YYYY-MM-DD): ")
-
-        StartDate = dt.datetime.strptime(StartDate, "%Y-%m-%d")
-        EndDate = dt.datetime.strptime(EndDate, "%Y-%m-%d")
-        StartDateF = StartDate.strftime("%Y-%m-%d")
-        EndDateF = EndDate.strftime("%Y-%m-%d")
+        # Option 7: Print Driver Financial Listing
         
+        # Constants
+        REVENUES_FILE = "Python/DataFiles/Revenues.dat"
+        EMPLOYEES_FILE = "Python/DataFiles/Employees.dat"
+        NUMBER_CHARS = "1234567890"
+
+        print("\nDriver Financial Listing\n")
+
+        # Validate the DriverNumber
+
+        while True:
+            DriverNumber = input("Enter the Driver Number: ")
+
+            if DriverNumber == "":
+                print("Data Entry Error - A Driver Number is Required.")
+            elif not set(DriverNumber).issubset(NUMBER_CHARS):
+                print("Data Entry Error - Driver Number Must Be Numeric.")
+            else:
+
+                # Check if the Employee Number exists in the data file
+                with open(EMPLOYEES_FILE, "r") as EmployeesFile:
+                    DriverFound = False
+                    for Line in EmployeesFile:
+                        DriverId, FirstName, LastName, Address, City, Prov, PostalCode, Phone1, Phone2, Date, Num1, Num2, EmpTotal = Line.strip().split(", ")
+                        Date = dt.datetime.strptime(Date, "%Y-%m-%d")
+                        if DriverId == DriverNumber:
+                            DriverFound = True
+                            break
+
+                    if not DriverFound:
+                        print(f"Driver {DriverNumber} not found in employees file.")
+                    else:
+                        break
+
+        # Validate the StartDate
+        while True:
+            StartDate = input("Enter Start Date (YYYY-MM-DD): ")
+
+            if StartDate == "":
+                print("Data Entry Error - Start Date Required")
+            else:
+                try:
+                    StartDate = dt.datetime.strptime(StartDate, "%Y-%m-%d")
+                except:
+                    print()
+                    print("Data Entry Error - Invalid Date Format. ")
+                    print()
+                else:
+                    break
+
+        # Validate the EndDate
+        while True:
+            EndDate = input("Enter End Date (YYYY-MM-DD): ")
+
+            if EndDate == "":
+                print("Data Entry Error - End Date Required")
+            else:
+                try:
+                    EndDate = dt.datetime.strptime(EndDate, "%Y-%m-%d")
+                except:
+                    print()
+                    print("Data Entry Error - Invalid Date Format. ")
+                    print()
+                else:
+                    if EndDate < StartDate:
+                        print()
+                        print("Data Entry Error - End Date Must Be After Start Date")
+                        print()
+                    else:
+                        break
 
         try:
-            RevenuesFile = open("Python/DataFiles/Revenues.dat", "r")
-            print(f"\nFinancial listing for driver {DriverNumber} ({StartDateF} to {EndDateF}):")
-            TransactionAmount = 0.0
-            TotalHst = 0.0
-            TotalAmount = 0.0
+            print("\n\nDriver Financial Report:")
+            print(f"     Driver Number:      {DriverNumber}")
+            print(f"     Driver Name:        {FirstName} {LastName}")
+            EmpTotal = float(EmpTotal)
+            print(f"     Current Balance:    {fv.FormatDollar2(EmpTotal):<10s}")
 
-            for Line in RevenuesFile:
-                TransactionId, DriverId, Date, Description, Amount, Hst, Total = Line.replace(" ", "").split(",")
-                Date = dt.datetime.strptime(Date, "%Y-%m-%d")
-                DateF = Date.strftime("%Y-%m-%d")
-                if DriverId == DriverNumber and StartDate <= Date <= EndDate:
-                    print(f"Transaction #: {TransactionId}, {DateF}, {Amount}, {Hst}, {Total}")
-                    TransactionAmount += float(Amount)
-                    TotalHst += float(Hst)
-                    TotalAmount += float(Total)
+            print(f"\n\nRevenues")
+            print()
+            print(f"Listing from {fv.FormatDateShort(StartDate):<10s} to {fv.FormatDateShort(EndDate):<10s}")
+            print()
+            print(f" Transaction   Transaction            Description            Subtotal        HST          Total")
+            print(f"     ID           Date")
+            print(f"---------------------------------------------------------------------------------------------------")
 
-            print("\nAmount Summary: \n")
-            print(f"subtotal: ${TransactionAmount:.2f}")
-            print(f"Total HST: ${TotalHst:.2f}")
-            print(f"Total amount: ${TotalAmount:.2f}")
-        except:
-            print("ERROR - failed to read revenues file.")
+            with open(REVENUES_FILE, "r") as RevenuesFile:
+                TransactionCounter = 0
+                TransactionAmount = 0.0
+                TotalHst = 0.0
+                TotalAmount = 0.0
 
-        input("Press Enter to Return to the Main Menu...")
+                for Line in RevenuesFile:
+                    try:
+                        TransactionId, DriverId, Date, Description, Amount, Hst, Total = Line.strip().split(", ")
+
+                        Date = dt.datetime.strptime(Date, "%Y-%m-%d")
+
+                        Amount = float(Amount)
+                        Hst = float(Hst)
+                        Total = float(Total)
+                        
+                        if DriverId == DriverNumber and Date >= StartDate and Date <= EndDate:
+                            print(f"    {TransactionId:<5s}      {fv.FormatDateShort(Date):<10s}     {Description:<28s}  {fv.FormatDollar2(Amount):>9s}      {fv.FormatDollar2(Hst):>7s}      {fv.FormatDollar2(Total):>10s}")
+                            TransactionCounter += 1
+                            TransactionAmount += float(Amount)
+                            TotalHst += float(Hst)
+                            TotalAmount += float(Total)
+                    except ValueError as E:
+                        print(f"Error processing line: {Line.strip()} - {E}")
+
+        except FileNotFoundError as E:
+            print(f"Error: {E}")
+        except Exception as E:
+            print(f"An unexpected error occurred: {E}")
+        else:
+            print(f"---------------------------------------------------------------------------------------------------")
+            print(f"                                                          {fv.FormatDollar2(TransactionAmount):>11s}   {fv.FormatDollar2(TotalHst):>10s}   {fv.FormatDollar2(TotalAmount):>13s}")
+            print(f"Number of transactions: {TransactionCounter:>3d}")
+
+
+        input("\n\nPress Enter to Return to the Main Menu...")
         BackToMenu()
         return
 
@@ -380,34 +465,40 @@ class JosephFunctions:
 
         # Validate the startDate
         while True:
-            startDate = input("Enter the start date (YYYY-MM-DD): ")
+            startDate = input("Enter the Start Date (YYYY-MM-DD): ")
 
-            try:
-                startDate = dt.datetime.strptime(startDate, "%Y-%m-%d")
-            except:
-                print()
-                print("Data Entry Error - Invalid Date Format. ")
-                print()
+            if startDate == "":
+                print("Data Entry Error - Start Date Required")
             else:
-                break
-
-        # Validate the endDate
-        while True:
-            endDate = input("Enter the end date (YYYY-MM-DD): ")
-
-            try:
-                endDate = dt.datetime.strptime(endDate, "%Y-%m-%d")
-            except:
-                print()
-                print("Data Entry Error - Invalid Date Format. ")
-                print()
-            else:
-                if endDate < startDate:
+                try:
+                    startDate = dt.datetime.strptime(startDate, "%Y-%m-%d")
+                except:
                     print()
-                    print("Data Entry Error - End Date Must Be After Start Date")
+                    print("Data Entry Error - Invalid Date Format. ")
                     print()
                 else:
                     break
+
+        # Validate the endDate
+        while True:
+            endDate = input("Enter the End Date (YYYY-MM-DD): ")
+
+            if endDate == "":
+                print("Data Entry Error - End Date Required")
+            else:
+                try:
+                    endDate = dt.datetime.strptime(endDate, "%Y-%m-%d")
+                except:
+                    print()
+                    print("Data Entry Error - Invalid Date Format. ")
+                    print()
+                else:
+                    if endDate < startDate:
+                        print()
+                        print("Data Entry Error - End Date Must Be After Start Date")
+                        print()
+                    else:
+                        break
 
         # Print the report headings
         print()
