@@ -43,6 +43,7 @@ class AshFunctions:
 class JoeyFunctions:
     def CompanyRevenue(lineList: list):
         #I am Joey and I made this!!!1!11!1
+        #(worked on from Dec. 6~, 2024 to Dec. 13, 2024)
         #This program will allow users to enter new 
         #revenue data information and save it to a file.
         #(rental info has to be input here too :P)
