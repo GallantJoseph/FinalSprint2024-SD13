@@ -307,6 +307,7 @@ class JakeFunctions:
         # Constants
         REVENUES_FILE = "Python/DataFiles/Revenues.dat"
         EMPLOYEES_FILE = "Python/DataFiles/Employees.dat"
+        NUMBER_CHARS = "1234567890"
 
         print("\nDriver Financial Listing\n")
 
@@ -317,6 +318,8 @@ class JakeFunctions:
 
             if DriverNumber == "":
                 print("Data Entry Error - A Driver Number is Required.")
+            elif not set(DriverNumber).issubset(NUMBER_CHARS):
+                print("Data Entry Error - Driver Number Must Be Numeric.")
             else:
 
                 # Check if the Employee Number exists in the data file
@@ -335,15 +338,41 @@ class JakeFunctions:
                         break
 
         # Validate the StartDate
+        while True:
+            StartDate = input("Enter Start Date (YYYY-MM-DD): ")
 
-        StartDate = input("Enter Start Date (YYYY-MM-DD): ")
+            if StartDate == "":
+                print("Data Entry Error - Start Date Required")
+            else:
+                try:
+                    StartDate = dt.datetime.strptime(StartDate, "%Y-%m-%d")
+                except:
+                    print()
+                    print("Data Entry Error - Invalid Date Format. ")
+                    print()
+                else:
+                    break
 
         # Validate the EndDate
+        while True:
+            EndDate = input("Enter End Date (YYYY-MM-DD): ")
 
-        EndDate = input("Enter End Date (YYYY-MM-DD): ")
-
-        StartDate = dt.datetime.strptime(StartDate, "%Y-%m-%d")
-        EndDate = dt.datetime.strptime(EndDate, "%Y-%m-%d")
+            if EndDate == "":
+                print("Data Entry Error - End Date Required")
+            else:
+                try:
+                    EndDate = dt.datetime.strptime(EndDate, "%Y-%m-%d")
+                except:
+                    print()
+                    print("Data Entry Error - Invalid Date Format. ")
+                    print()
+                else:
+                    if EndDate < StartDate:
+                        print()
+                        print("Data Entry Error - End Date Must Be After Start Date")
+                        print()
+                    else:
+                        break
 
         try:
             print("\n\nDriver Financial Report:")
@@ -389,12 +418,13 @@ class JakeFunctions:
             print(f"Error: {E}")
         except Exception as E:
             print(f"An unexpected error occurred: {E}")
+        else:
+            print(f"---------------------------------------------------------------------------------------------------")
+            print(f"                                                          {fv.FormatDollar2(TransactionAmount):>11s}   {fv.FormatDollar2(TotalHst):>10s}   {fv.FormatDollar2(TotalAmount):>13s}")
+            print(f"Number of transactions: {TransactionCounter:>3d}")
 
-        print(f"---------------------------------------------------------------------------------------------------")
-        print(f"                                                          {fv.FormatDollar2(TransactionAmount):>11s}   {fv.FormatDollar2(TotalHst):>10s}   {fv.FormatDollar2(TotalAmount):>13s}")
-        print(f"Number of transactions: {TransactionCounter:>3d}")
 
-        input("Press Enter to Return to the Main Menu...")
+        input("\n\nPress Enter to Return to the Main Menu...")
         BackToMenu()
         return
 
@@ -435,34 +465,40 @@ class JosephFunctions:
 
         # Validate the startDate
         while True:
-            startDate = input("Enter the start date (YYYY-MM-DD): ")
+            startDate = input("Enter the Start Date (YYYY-MM-DD): ")
 
-            try:
-                startDate = dt.datetime.strptime(startDate, "%Y-%m-%d")
-            except:
-                print()
-                print("Data Entry Error - Invalid Date Format. ")
-                print()
+            if startDate == "":
+                print("Data Entry Error - Start Date Required")
             else:
-                break
-
-        # Validate the endDate
-        while True:
-            endDate = input("Enter the end date (YYYY-MM-DD): ")
-
-            try:
-                endDate = dt.datetime.strptime(endDate, "%Y-%m-%d")
-            except:
-                print()
-                print("Data Entry Error - Invalid Date Format. ")
-                print()
-            else:
-                if endDate < startDate:
+                try:
+                    startDate = dt.datetime.strptime(startDate, "%Y-%m-%d")
+                except:
                     print()
-                    print("Data Entry Error - End Date Must Be After Start Date")
+                    print("Data Entry Error - Invalid Date Format. ")
                     print()
                 else:
                     break
+
+        # Validate the endDate
+        while True:
+            endDate = input("Enter the End Date (YYYY-MM-DD): ")
+
+            if endDate == "":
+                print("Data Entry Error - End Date Required")
+            else:
+                try:
+                    endDate = dt.datetime.strptime(endDate, "%Y-%m-%d")
+                except:
+                    print()
+                    print("Data Entry Error - Invalid Date Format. ")
+                    print()
+                else:
+                    if endDate < startDate:
+                        print()
+                        print("Data Entry Error - End Date Must Be After Start Date")
+                        print()
+                    else:
+                        break
 
         # Print the report headings
         print()
