@@ -6,8 +6,12 @@ Dates: Dec 1st, 2024 - Dec 15, 2024
 from SharedFunctions import clear
 from MenuOptions import *
 from time import sleep
+import datetime as dt
 
 while True:
+    # Define the constants
+    CURR_DATE = dt.datetime.now()
+
     # Reads the values of the Defaults file every time the loop repeats
     f = open("Python/DataFiles/Defaults.dat", "r")
 
@@ -16,6 +20,13 @@ while True:
         defaults.append(line)
 
     f.close()
+
+    # At launch, check if today's date is the first day of the month. If it is, run a function
+    # that will generate all the revenue transactions for the Stand Fees for the driver who own
+    # use their own car.
+
+    if CURR_DATE.day == 1:
+        MiscFunctions.GenerateStandFeesTrans(defaults)
 
     # The Main Menu
     clear()

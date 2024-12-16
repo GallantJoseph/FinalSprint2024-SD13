@@ -1,7 +1,7 @@
 '''
-Names: Joseph, Joey, Jake, Justin, Ashton, Mike
-Dates: Dec 04, 2024 - Dec 15, 2024
-Desc : Compilation of all functions to be used in main.py
+    Names: Joseph, Joey, Jake, Justin, Ashton, Mike
+    Dates: Dec 04, 2024 - Dec 15, 2024
+    Desc : Compilation of all functions to be used in main.py
 '''
 
 # Functions used across all classes
@@ -280,17 +280,8 @@ class JoeyFunctions:
             #Update constants and rewrite them to defaults.
             NEXT_TRANS_NUM += 1
 
-            f = open("Python/DataFiles/Defaults.dat", "w")
+            MiscFunctions.WriteDefaults(NEXT_TRANS_NUM, MAX_DRIVE_NUM, MON_STAND_FEE, DAY_REN_FEE, WEE_REN_FEE, HST_RATE)
             
-            f.writelines(f"{str(NEXT_TRANS_NUM)}\n")
-            f.writelines(f"{str(MAX_DRIVE_NUM)}\n")
-            f.writelines(f"{str(MON_STAND_FEE)}\n")
-            f.writelines(f"{str(DAY_REN_FEE)}\n")
-            f.writelines(f"{str(WEE_REN_FEE)}\n")
-            f.writelines(f"{str(HST_RATE)}")
-
-            f.close()
-
             con = input("\nWould You Like To Enter Another Transaction? (Y/N): ").upper()
             print()
             if con != "Y":
@@ -646,3 +637,71 @@ class JosephFunctions:
 
 class MichaelFunctions:
     pass # Delete this line and paste your functions here
+
+class MiscFunctions:
+    def GenerateStandFeesTrans(lineList: list):
+        '''
+            Generates the monthly Revenue transactions Stand Fees for the employees who use their own vehicle.
+        '''
+
+        # Define the constants
+        CURR_DATE = dt.datetime.now()
+
+        HST_RATE = float(lineList[5])
+        STAND_FEES = float(lineList[2])
+        STAND_HST = STAND_FEES * HST_RATE
+        STAND_TOTAL = STAND_FEES + STAND_HST
+        DESC = "Stand Fees"
+
+        # Declare the variables
+        transId = int(lineList[0])
+
+        # Open the Employees file
+        f = open("Python/DataFiles/Employees.dat", "r")
+
+        for employee in f:
+            employeeRecord = employee.split(",")
+            ownCar = int(employeeRecord[11].strip())
+
+            # If the Employee uses their own car, create a revenue transaction with the Stand Fees
+            if ownCar:
+                driverNum = employeeRecord[0].strip()
+                MiscFunctions.WriteRevenueTrans(transId, driverNum, fv.FormatDateShort(CURR_DATE), DESC, STAND_FEES, STAND_HST, STAND_TOTAL)
+                transId += 1
+                
+        # Close the file
+        f.close()
+
+        # Write the new values to the Defaults file
+        MiscFunctions.WriteDefaults(transId, float(lineList[1]), float(lineList[2]), float(lineList[3]), float(lineList[4]), float(lineList[5]))
+
+
+    def WriteRevenueTrans(transId, driverNum, transDate, desc, subtot, hst, total):
+        # Open the file for writing
+        f = open("Python/DataFiles/Revenues.dat", "a")
+
+        f.writelines(f"{str(transId)}, ")
+        f.writelines(f"{str(driverNum)}, ")
+        f.writelines(f"{str(transDate)}, ")
+        f.writelines(f"{str(desc)}, ")
+        f.writelines(f"{str(subtot)}, ")
+        f.writelines(f"{str(hst)}, ")
+        f.writelines(f"{str(total)}\n")
+
+        # Close the file
+        f.close
+
+    def WriteDefaults(NEXT_TRANS_NUM, MAX_DRIVE_NUM, MON_STAND_FEE, DAY_REN_FEE, WEE_REN_FEE, HST_RATE):
+        '''
+            Write the Defaults values to the Defaults.dat
+        '''
+        f = open("Python/DataFiles/Defaults.dat", "w")
+        
+        f.writelines(f"{str(NEXT_TRANS_NUM)}\n")
+        f.writelines(f"{str(MAX_DRIVE_NUM)}\n")
+        f.writelines(f"{str(MON_STAND_FEE)}\n")
+        f.writelines(f"{str(DAY_REN_FEE)}\n")
+        f.writelines(f"{str(WEE_REN_FEE)}\n")
+        f.writelines(f"{str(HST_RATE)}")
+
+        f.close()
