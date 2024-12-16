@@ -195,7 +195,7 @@ async function RightNavDsp() {
       document.getElementById("runcommand").innerHTML = runStr;
     }
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 44; i++) {
       dspString += ".";
 
       await sleep(150);
@@ -205,7 +205,7 @@ async function RightNavDsp() {
     for (let i = dspString.length - 1; i >= 0; i--) {
       dspString = dspString.slice(0, i);
 
-      await sleep(150);
+      await sleep(75);
 
       document.getElementById("navrightmsg").innerHTML = dspString;
     }
@@ -214,10 +214,12 @@ async function RightNavDsp() {
     for (let i = runStr.length - 1; i >= 0; i--) {
       runStr = runStr.slice(0, i);
 
-      await sleep(150);
+      await sleep(75);
 
       document.getElementById("runcommand").innerHTML = runStr;
     }
+
+    await sleep(150);
   }
 }
 
