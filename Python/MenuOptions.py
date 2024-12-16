@@ -667,6 +667,9 @@ class MiscFunctions:
             if ownCar:
                 driverNum = employeeRecord[0].strip()
                 MiscFunctions.WriteRevenueTrans(transId, driverNum, fv.FormatDateShort(CURR_DATE), DESC, STAND_FEES, STAND_HST, STAND_TOTAL)
+
+                # The Balance Due amount would be updated here in the Employees.dat file.
+
                 transId += 1
                 
         # Close the file
