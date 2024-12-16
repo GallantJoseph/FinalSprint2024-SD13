@@ -1,6 +1,6 @@
 '''
 Names: Joseph, Joey, Jake, Justin, Ashton, Mike
-Dates: Dec 04, 2024 - 
+Dates: Dec 04, 2024 - Dec 15, 2024
 Desc : Compilation of all functions to be used in main.py
 '''
 
@@ -433,7 +433,7 @@ class JosephFunctions:
         '''
         Desc.: Print a company profit listing, including revenues and expenses, and profit margin.
         Author: Joseph Gallant
-        Dates: Dec. 5, 2024 - Dec. 11, 2024
+        Dates: Dec. 5, 2024 - Dec. 15, 2024
         '''
 
         # Initialize counters and accumulators
@@ -630,7 +630,13 @@ class JosephFunctions:
         # Calculate the profit margin
         profitMargin = revenuesTot - expensesTot
 
-        print(f"Profit Margin:      {fv.FormatDollar2(profitMargin):>13s}")
+        # Profit margin display value, inside parentheses if negative.
+        if profitMargin >= 0:
+            profitMarginDsp = f" {fv.FormatDollar2(profitMargin)} "
+        else:
+            profitMarginDsp = f"(${fv.FormatComma2(abs(profitMargin))})"
+
+        print(f"Profit Margin:     {profitMarginDsp:>15s}")
         print()
         print()
         input("Press Enter to Return to the Main Menu...")

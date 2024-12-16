@@ -83,7 +83,7 @@ const strings = [
   "We love SD 13.",
   "Moeeeee is awesome.",
   "Keyin is dope.",
-  "My group members smell but i love dem.",
+  "My group members smell but I love dem.",
   "Aren't you glad you don't have to deal with the spelling corrections anymore?",
   "It's JAVASCRIPT not JAVA.",
   "Ashton GPT.",
